@@ -31,7 +31,7 @@
           <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
         </div>
       </nav>
-      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div></div>
+      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar" id="userAvatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name" id="userName">Demo Auditor</div><div class="sidebar-user-role" id="userRole">선임심사원 · PRO</div></div></div></div>
     </aside>
 
     <!-- ═══ HEADER ═══ -->
@@ -182,7 +182,107 @@
   </nav>
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
+  <!-- 📥 Upload Modal -->
+  <div class="kb-modal-overlay" id="uploadModal">
+    <div class="kb-modal-content glass-card">
+      <div class="kb-modal-header">
+        <h3>📚 새 심사 자료 업로드</h3>
+        <button class="modal-close-btn" onclick="closeUploadModal()">&times;</button>
+      </div>
+      <form id="uploadForm" onsubmit="handleUploadSubmit(event)">
+        <div class="form-group">
+          <label for="uploadTitle">자료 제목</label>
+          <input type="text" id="uploadTitle" class="form-input" required placeholder="예: ISO 9001:2015 내부심사 가이드">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="uploadCategory">카테고리</label>
+            <select id="uploadCategory" class="form-select" required>
+              <option value="iso">ISO 규격서</option>
+              <option value="checklist">심사 체크리스트</option>
+              <option value="cases">심사 사례집</option>
+              <option value="manual">품질 매뉴얼</option>
+              <option value="procedure">절차서</option>
+              <option value="fmea">FMEA 자료</option>
+              <option value="cp">Control Plan</option>
+              <option value="spc">SPC 자료</option>
+              <option value="expert">전문가 노하우</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="uploadFormat">파일 포맷</label>
+            <select id="uploadFormat" class="form-select" required>
+              <option value="PDF">PDF 문서</option>
+              <option value="XLSX">Excel 스프레드시트</option>
+              <option value="DOCX">Word 워드문서</option>
+              <option value="PPT">PowerPoint 발표자료</option>
+              <option value="🧠 노하우">뇌(🧠) 노하우 글</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="uploadMetaInfo">용량 또는 분량</label>
+            <input type="text" id="uploadMetaInfo" class="form-input" required placeholder="예: 42 페이지 또는 120 항목">
+          </div>
+          <div class="form-group">
+            <label for="uploadDate">등록일</label>
+            <input type="text" id="uploadDate" class="form-input" required readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="uploadDesc">자료 설명</label>
+          <textarea id="uploadDesc" class="form-textarea" required placeholder="자료에 대한 상세한 핵심 설명을 적어주세요." rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeUploadModal()">취소</button>
+          <button type="submit" class="btn btn-accent btn-sm">등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
+    let isAdmin = false;
+
+    // URL 파라미터 확인 및 Admin 모드 적용
+    function checkAdminMode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('role') === 'admin') {
+        isAdmin = true;
+        // 사이드바 프로필 변경
+        const avatar = document.getElementById('userAvatar');
+        const name = document.getElementById('userName');
+        const role = document.getElementById('userRole');
+        if (avatar) avatar.textContent = 'AD';
+        if (name) name.textContent = 'Admin User';
+        if (role) role.textContent = '최고관리자 · SYSTEM';
+        
+        // 사이드바의 Reports 링크에도 ?role=admin 유지하게 변경
+        document.querySelectorAll('.sidebar-nav a').forEach(a => {
+          if (a.getAttribute('href') === 'reports.html') {
+            a.setAttribute('href', 'reports.html?role=admin');
+          }
+        });
+      }
+    }
+
+    // 초기 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAdminMode();
+      updateCategoryCounts();
+      
+      // 등록일 필드 오늘 날짜 기본 입력
+      const dateField = document.getElementById('uploadDate');
+      if (dateField) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateField.value = `${yyyy}.${mm}.${dd}`;
+      }
+    });
+
     function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
     const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
     function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
@@ -203,7 +303,112 @@
       });
     }
 
-    function showUploadModal(){alert('자료 업로드 기능은 PRO 플랜에서 사용할 수 있습니다.');}
+    // 모달 제어
+    function showUploadModal(){
+      if (!isAdmin) {
+        alert('자료 업로드 기능은 최고관리자(Admin) 권한이 필요합니다. Reports Center의 Knowledge Base 링크를 통해 관리자 모드로 접속해 주세요.');
+        return;
+      }
+      document.getElementById('uploadModal').classList.add('active');
+    }
+
+    function closeUploadModal(){
+      document.getElementById('uploadModal').classList.remove('active');
+      document.getElementById('uploadForm').reset();
+      
+      // 날짜 재세팅
+      const dateField = document.getElementById('uploadDate');
+      if (dateField) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateField.value = `${yyyy}.${mm}.${dd}`;
+      }
+    }
+
+    // 업로드 등록 처리
+    function handleUploadSubmit(event) {
+      event.preventDefault();
+      
+      const title = document.getElementById('uploadTitle').value;
+      const category = document.getElementById('uploadCategory').value;
+      const format = document.getElementById('uploadFormat').value;
+      const meta = document.getElementById('uploadMetaInfo').value;
+      const desc = document.getElementById('uploadDesc').value;
+      const date = document.getElementById('uploadDate').value;
+      
+      // 새 카드 생성
+      const grid = document.getElementById('kbGrid');
+      const card = document.createElement('div');
+      card.className = 'kb-card page-enter';
+      card.dataset.cat = category;
+      
+      // 카테고리 뱃지 스타일 결정
+      let badgeClass = 'badge-primary';
+      let icon = '📋';
+      if (category === 'checklist') { badgeClass = 'badge-warning'; icon = '✅'; }
+      else if (category === 'cases') { badgeClass = 'badge-info'; icon = '📖'; }
+      else if (category === 'fmea') { badgeClass = 'badge-danger'; icon = '🔥'; }
+      else if (category === 'expert') { badgeClass = 'badge-accent'; icon = '🧠'; }
+      else if (category === 'cp') { badgeClass = 'badge-success'; icon = '📊'; }
+      else if (category === 'spc') { badgeClass = 'badge-info'; icon = '📈'; }
+      else if (category === 'procedure') { badgeClass = 'badge-warning'; icon = '📄'; }
+      else if (category === 'manual') { badgeClass = 'badge-danger'; icon = '📕'; }
+      
+      // 내부 마크업 구성
+      card.innerHTML = `
+        <div class="kb-card-header">
+          <span class="kb-card-icon">${icon}</span>
+          <span class="badge ${badgeClass}">${category.toUpperCase()}</span>
+        </div>
+        <div class="kb-card-title">${title}</div>
+        <div class="kb-card-desc">${desc}</div>
+        <div class="kb-card-meta">
+          <span>📎 ${format}</span>
+          <span>•</span>
+          <span>${meta}</span>
+          <span>•</span>
+          <span>${date}</span>
+        </div>
+      `;
+      
+      // 목록 맨 처음에 새 카드 추가
+      grid.insertBefore(card, grid.firstChild);
+      
+      // 카운트 뱃지 숫자 갱신
+      updateCategoryCounts();
+      
+      // 모달 닫기
+      closeUploadModal();
+      
+      // 업로드 성공 얼럿
+      alert('새로운 심사 자료가 Knowledge Base에 성공적으로 업로드되었습니다!');
+    }
+
+    // 카테고리별 자료 수 계산 및 업데이트
+    function updateCategoryCounts() {
+      const cards = document.querySelectorAll('.kb-card');
+      const counts = { all: cards.length };
+      
+      cards.forEach(card => {
+        const cat = card.dataset.cat;
+        counts[cat] = (counts[cat] || 0) + 1;
+      });
+      
+      document.querySelectorAll('.kb-category').forEach(el => {
+        // onclick 속성에서 카테고리 문자열 추출
+        const onclickText = el.getAttribute('onclick') || '';
+        const match = onclickText.match(/filterKB\(this,\s*'([^']+)'\)/);
+        if (match) {
+          const cat = match[1];
+          const badge = el.querySelector('.cat-count');
+          if (badge) {
+            badge.textContent = counts[cat] || 0;
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>
