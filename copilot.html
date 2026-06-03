@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Audit Copilot — 자연어 기반 심사 지원 AI">
+  <title>AI Copilot — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/copilot.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo"><div class="logo-icon">AC</div><div class="logo-text"><span class="logo-name">Audit Copilot</span><span class="logo-subtitle">PRO ILI SMART</span></div></div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section"><div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+          <a href="workspace.html" class="nav-item"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <a href="copilot.html" class="nav-item active"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item"><span class="nav-icon">📚</span><span class="nav-label">Knowledge Base</span></a>
+          <a href="reports.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-label">Report Center</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-label">Admin</span></a>
+          <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div></div>
+    </aside>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+        <h2 style="font-size:var(--text-h4);font-weight:var(--weight-bold);">AI Audit Copilot</h2>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='login.html'" style="color:var(--color-text-secondary);">로그아웃</button>
+      </div>
+    </header>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="app-main page-enter" style="padding:var(--space-4);">
+      <div class="copilot-layout">
+        <!-- ═══ Prompt Templates ═══ -->
+        <div class="prompt-sidebar">
+          <div class="prompt-sidebar-header">💡 Quick Prompts</div>
+          <div class="prompt-list">
+            <div class="prompt-category-title">심사 질문</div>
+            <div class="prompt-card" onclick="usePrompt('ISO 9001 8.5.1 심사 질문을 생성해 주세요')">
+              <div class="prompt-title">생산 공정 심사 질문</div>
+              <div class="prompt-desc">ISO 9001 §8.5.1 기반</div>
+            </div>
+            <div class="prompt-card" onclick="usePrompt('공급업체 평가 프로세스를 검토해 주세요')">
+              <div class="prompt-title">공급업체 평가 검토</div>
+              <div class="prompt-desc">외부 공급자 관리</div>
+            </div>
+            <div class="prompt-card" onclick="usePrompt('반도체 제조공정 심사 체크포인트를 알려주세요')">
+              <div class="prompt-title">반도체 공정 체크포인트</div>
+              <div class="prompt-desc">Semiconductor Audit</div>
+            </div>
+
+            <div class="prompt-category-title">부적합 분석</div>
+            <div class="prompt-card" onclick="usePrompt('특채 승인 절차의 적합성을 평가해 주세요')">
+              <div class="prompt-title">특채 승인 절차 평가</div>
+              <div class="prompt-desc">Concession / Deviation</div>
+            </div>
+            <div class="prompt-card" onclick="usePrompt('부적합 원인 분석을 5 Why 방법으로 수행해 주세요')">
+              <div class="prompt-title">5 Why 원인 분석</div>
+              <div class="prompt-desc">Root Cause Analysis</div>
+            </div>
+
+            <div class="prompt-category-title">프로세스 분석</div>
+            <div class="prompt-card" onclick="usePrompt('Wafer FAB Lithography 공정의 Turtle Diagram을 생성해 주세요')">
+              <div class="prompt-title">Turtle Diagram 생성</div>
+              <div class="prompt-desc">Process Audit Tool</div>
+            </div>
+            <div class="prompt-card" onclick="usePrompt('입고검사 프로세스의 SIPOC을 분석해 주세요')">
+              <div class="prompt-title">SIPOC 분석</div>
+              <div class="prompt-desc">Process Mapping</div>
+            </div>
+
+            <div class="prompt-category-title">리스크 평가</div>
+            <div class="prompt-card" onclick="usePrompt('Etching 공정의 FMEA 리스크 평가를 수행해 주세요')">
+              <div class="prompt-title">FMEA 리스크 평가</div>
+              <div class="prompt-desc">S/O/D/RPN 분석</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Chat Area ═══ -->
+        <div class="copilot-chat">
+          <div class="copilot-header">
+            <div class="copilot-title">
+              <div class="copilot-avatar">🤖</div>
+              <div>
+                <div class="copilot-name">AI Audit Copilot</div>
+                <div class="copilot-status"><span class="status-dot active"></span> Online — Ready</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:var(--space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="clearChat()">🗑️ 초기화</button>
+            </div>
+          </div>
+
+          <div class="copilot-messages" id="chatMessages">
+            <!-- Welcome Message -->
+            <div class="msg ai">
+              <div class="msg-avatar">🤖</div>
+              <div class="msg-content">
+                <h4>안녕하세요! AI Audit Copilot입니다.</h4>
+                <p>ISO 심사에 관한 모든 질문에 답변해 드립니다. 아래와 같은 요청을 할 수 있습니다:</p>
+                <ul>
+                  <li>심사 질문 생성 (규격/조항/공정/산업별)</li>
+                  <li>부적합 판정 및 NC Statement 작성</li>
+                  <li>프로세스 분석 (SIPOC, Turtle Diagram)</li>
+                  <li>리스크 평가 (FMEA, RPN 계산)</li>
+                  <li>원인 분석 (5 Why, Fishbone, FTA)</li>
+                  <li>규격 해설 및 심사 포인트 안내</li>
+                </ul>
+                <div class="msg-source">
+                  <span class="source-tag">📚 Knowledge Base 연동</span>
+                  <span class="source-tag">🧠 Expert Knowledge 참조</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sample Conversation -->
+            <div class="msg user">
+              <div class="msg-avatar">👤</div>
+              <div class="msg-content">ISO 9001 8.5.1 심사 질문을 생성해 주세요. 반도체 Lithography 공정 기준으로.</div>
+            </div>
+
+            <div class="msg ai">
+              <div class="msg-avatar">🤖</div>
+              <div class="msg-content">
+                <h4>📋 ISO 9001:2015 §8.5.1 — 생산 및 서비스 제공의 관리</h4>
+                <p><strong>Lithography 공정</strong> 기준 심사 질문입니다:</p>
+                <p><strong>기본 질문 (Basic)</strong></p>
+                <ol>
+                  <li>Lithography 공정의 작업표준서(WI)는 최신 개정본으로 현장에 비치되어 있습니까?</li>
+                  <li>Exposure Energy, Focus Offset 등 공정 파라미터의 관리 기준은 설정되어 있습니까?</li>
+                  <li>Reticle/Mask의 보관, 취급, 검사 절차는 수립되어 있습니까?</li>
+                </ol>
+                <p><strong>심화 질문 (Deep-Dive)</strong></p>
+                <ol start="4">
+                  <li>Critical Dimension (CD) 측정 데이터에 대한 SPC 관리도의 관리 상한/하한 설정 근거는?</li>
+                  <li>Photo Resist 도포 두께의 Cpk 값은 어떻게 관리되고 있습니까?</li>
+                </ol>
+                <p><strong>추적 질문 (Follow-up)</strong></p>
+                <ol start="6">
+                  <li>최근 6개월간 Lithography 관련 부적합 발생 현황과 시정조치 결과는?</li>
+                  <li>장비 예방보전(PM) 주기는 적절하며, PM 이력은 관리되고 있습니까?</li>
+                </ol>
+                <div class="msg-source">
+                  <span class="source-tag">📋 ISO 9001:2015</span>
+                  <span class="source-tag">🔬 반도체 Audit Package</span>
+                  <span class="source-tag">🧠 Expert Knowledge</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <div class="copilot-input-area">
+            <div class="copilot-input-wrapper">
+              <textarea class="copilot-input" id="chatInput" rows="1" placeholder="심사에 관해 무엇이든 질문하세요..." onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+              <button class="copilot-send" onclick="sendMessage()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+            </div>
+            <div class="copilot-input-hint">Enter로 전송 · Shift+Enter로 줄바꿈 · AI 응답 시 근거 출처가 표시됩니다</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="workspace.html" class="bottom-nav-item"><span class="nav-icon">🔍</span>Audit</a>
+    <a href="copilot.html" class="bottom-nav-item active"><span class="nav-icon">🤖</span>AI</a>
+    <a href="knowledge-base.html" class="bottom-nav-item"><span class="nav-icon">📚</span>KB</a>
+    <a href="reports.html" class="bottom-nav-item"><span class="nav-icon">📄</span>Reports</a>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    // ── Theme / Sidebar ──
+    function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
+    const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
+
+    // ── Auto Resize Textarea ──
+    function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
+
+    // ── Chat Key Handler ──
+    function handleChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+
+    // ── Send Message ──
+    function sendMessage(){
+      const input=document.getElementById('chatInput');
+      const text=input.value.trim();
+      if(!text)return;
+      appendMessage('user',text);
+      input.value='';input.style.height='auto';
+      showTyping();
+      setTimeout(()=>{removeTyping();appendAIResponse(text);},1500+Math.random()*1000);
+    }
+
+    // ── Use Prompt ──
+    function usePrompt(text){
+      document.getElementById('chatInput').value=text;
+      document.getElementById('chatInput').focus();
+      autoResize(document.getElementById('chatInput'));
+    }
+
+    // ── Append Message ──
+    function appendMessage(role,text){
+      const container=document.getElementById('chatMessages');
+      const icon=role==='user'?'👤':'🤖';
+      const div=document.createElement('div');div.className=`msg ${role}`;
+      div.innerHTML=`<div class="msg-avatar">${icon}</div><div class="msg-content">${text}</div>`;
+      container.appendChild(div);container.scrollTop=container.scrollHeight;
+    }
+
+    // ── Typing Indicator ──
+    function showTyping(){
+      const container=document.getElementById('chatMessages');
+      const div=document.createElement('div');div.className='msg ai';div.id='typingMsg';
+      div.innerHTML=`<div class="msg-avatar">🤖</div><div class="msg-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+      container.appendChild(div);container.scrollTop=container.scrollHeight;
+    }
+    function removeTyping(){const t=document.getElementById('typingMsg');if(t)t.remove();}
+
+    // ── AI Response (Demo) ──
+    const demoResponses={
+      '공급업체':'<h4>📋 공급업체 평가 프로세스 검토</h4><p><strong>ISO 9001:2015 §8.4</strong> 기반 검토 포인트:</p><ol><li>공급업체 선정 기준 및 평가 절차가 문서화되어 있습니까?</li><li>정기 재평가 주기 및 평가 항목은 적절합니까?</li><li>공급업체 성과 모니터링(납기율, 불량률) 데이터는 관리되고 있습니까?</li><li>부적합 공급업체에 대한 조치 프로세스는 수립되어 있습니까?</li></ol><div class="msg-source"><span class="source-tag">📋 ISO 9001:2015 §8.4</span></div>',
+      '특채':'<h4>⚠️ 특채(Concession) 승인 절차 적합성 평가</h4><p><strong>ISO 9001:2015 §8.7</strong> 관련:</p><ol><li>특채 승인 권한자는 명확히 지정되어 있습니까?</li><li>고객 승인이 필요한 경우 사전 동의 프로세스가 있습니까?</li><li>특채 이력이 추적 가능하도록 기록 관리되고 있습니까?</li><li>특채 빈도 분석을 통한 재발 방지 활동이 수행되고 있습니까?</li></ol><div class="msg-source"><span class="source-tag">📋 ISO 9001:2015 §8.7</span><span class="source-tag">🧠 Expert Knowledge</span></div>',
+      '5 Why':'<h4>🔍 5 Why 원인 분석</h4><p>문제를 입력해 주시면 5 Why 분석을 수행합니다. 예시:</p><p><strong>문제:</strong> Lithography CD 규격 초과</p><ol><li><strong>Why 1:</strong> Exposure Energy가 기준 범위를 벗어남</li><li><strong>Why 2:</strong> 장비 PM 후 파라미터 재설정이 미흡</li><li><strong>Why 3:</strong> PM 후 검증 절차서에 파라미터 확인 항목 누락</li><li><strong>Why 4:</strong> 절차서 개정 시 장비 엔지니어 Review가 미실시</li><li><strong>Why 5:</strong> 절차서 개정 프로세스에 관련 부서 Review 단계 미포함</li></ol><p><strong>근본 원인:</strong> 문서 개정 프로세스에 Cross-functional Review 단계 부재</p><div class="msg-source"><span class="source-tag">🔬 Root Cause Analysis</span></div>',
+      'Turtle':'<h4>🐢 Turtle Diagram — Wafer FAB Lithography</h4><p><strong>Process:</strong> Lithography (Photo 공정)</p><table style="width:100%;font-size:12px;border-collapse:collapse;margin:8px 0;"><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;font-weight:bold;color:var(--color-accent);">Input</td><td style="padding:6px;">Wafer, Photo Resist, Reticle</td></tr><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;font-weight:bold;color:var(--color-accent);">Output</td><td style="padding:6px;">패터닝된 Wafer, CD 측정 데이터</td></tr><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;font-weight:bold;color:var(--color-accent);">With What</td><td style="padding:6px;">Stepper/Scanner 장비, Coater, Developer</td></tr><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;font-weight:bold;color:var(--color-accent);">With Whom</td><td style="padding:6px;">Photo 엔지니어, 장비 기술자</td></tr><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;font-weight:bold;color:var(--color-accent);">How</td><td style="padding:6px;">WI-LITHO-001, Control Plan, FMEA</td></tr><tr><td style="padding:6px;font-weight:bold;color:var(--color-accent);">KPI</td><td style="padding:6px;">CD Uniformity, Overlay Accuracy, Cpk</td></tr></table><div class="msg-source"><span class="source-tag">⚙️ Process Audit Engine</span><span class="source-tag">🔬 Semiconductor Package</span></div>',
+      'SIPOC':'<h4>📊 SIPOC 분석 — 입고검사 프로세스</h4><table style="width:100%;font-size:12px;border-collapse:collapse;margin:8px 0;"><tr style="background:var(--color-glass);"><th style="padding:6px;text-align:left;color:var(--color-accent);">S</th><th style="padding:6px;text-align:left;color:var(--color-accent);">I</th><th style="padding:6px;text-align:left;color:var(--color-accent);">P</th><th style="padding:6px;text-align:left;color:var(--color-accent);">O</th><th style="padding:6px;text-align:left;color:var(--color-accent);">C</th></tr><tr style="border-bottom:1px solid var(--color-border);"><td style="padding:6px;">공급업체</td><td style="padding:6px;">원자재, 부품, COA</td><td style="padding:6px;">수입검사, 시료채취, 측정, 판정</td><td style="padding:6px;">합격품, 불합격품, 검사성적서</td><td style="padding:6px;">생산부서, 자재창고</td></tr></table><div class="msg-source"><span class="source-tag">⚙️ Process Audit Engine</span></div>'
+    };
+
+    function appendAIResponse(userText){
+      let response='<p>요청하신 내용을 분석하고 있습니다. 구체적인 규격 조항이나 공정명을 포함하면 더 정확한 답변을 드릴 수 있습니다.</p><div class="msg-source"><span class="source-tag">🤖 AI Copilot</span></div>';
+      for(const[key,val]of Object.entries(demoResponses)){if(userText.includes(key)){response=val;break;}}
+      const container=document.getElementById('chatMessages');
+      const div=document.createElement('div');div.className='msg ai';
+      div.innerHTML=`<div class="msg-avatar">🤖</div><div class="msg-content">${response}</div>`;
+      container.appendChild(div);container.scrollTop=container.scrollHeight;
+    }
+
+    // ── Clear Chat ──
+    function clearChat(){
+      const container=document.getElementById('chatMessages');
+      container.innerHTML='';
+      appendMessage('ai','<h4>대화가 초기화되었습니다.</h4><p>새로운 질문을 입력하거나, 왼쪽의 Quick Prompt를 선택하세요.</p>');
+    }
+  </script>
+</body>
+</html>

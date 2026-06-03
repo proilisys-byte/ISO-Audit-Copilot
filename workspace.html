@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Audit Workspace — ISO 심사 작업 공간">
+  <title>Audit Workspace — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/workspace.css">
+</head>
+<body>
+  <div class="app-layout" id="appLayout">
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">AC</div>
+        <div class="logo-text"><span class="logo-name">Audit Copilot</span><span class="logo-subtitle">PRO ILI SMART</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+          <a href="workspace.html" class="nav-item active"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <a href="copilot.html" class="nav-item"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item"><span class="nav-icon">📚</span><span class="nav-label">Knowledge Base</span></a>
+          <a href="reports.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-label">Report Center</span></a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-label">Admin</span></a>
+          <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div>
+      </div>
+    </aside>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <div class="header-search desktop-only">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="조항 검색 (예: 8.5.1)..." id="globalSearch">
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()" title="테마 전환">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='login.html'" style="color:var(--color-text-secondary);">로그아웃</button>
+      </div>
+    </header>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="app-main page-enter" style="padding: var(--space-4);">
+      <!-- Toolbar -->
+      <div class="ws-toolbar">
+        <div class="ws-toolbar-left">
+          <h1 style="font-size: var(--text-h3); font-weight: var(--weight-bold);">Audit Workspace</h1>
+          <div class="ws-standard-selector">
+            <button class="ws-standard-btn active" onclick="selectStandard(this)">ISO 9001</button>
+            <button class="ws-standard-btn" onclick="selectStandard(this)">ISO 14001</button>
+            <button class="ws-standard-btn" onclick="selectStandard(this)">ISO 45001</button>
+            <button class="ws-standard-btn" onclick="selectStandard(this)">IATF 16949</button>
+            <button class="ws-standard-btn" onclick="selectStandard(this)">AS9100</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:var(--space-2);">
+          <a href="copilot.html" class="btn btn-accent btn-sm"><span>🤖</span> AI Copilot</a>
+        </div>
+      </div>
+
+      <!-- 3-Column Workspace -->
+      <div class="workspace-container">
+        <!-- ═══ LEFT: ISO Clause Navigator ═══ -->
+        <div class="ws-panel">
+          <div class="ws-panel-header">
+            <span class="ws-panel-title"><span class="panel-icon">📋</span> ISO Clause Navigator</span>
+          </div>
+          <div class="ws-panel-body">
+            <div class="clause-tree" id="clauseTree">
+              <!-- Section 4 -->
+              <div class="clause-group open">
+                <div class="clause-group-header" onclick="toggleClause(this)">
+                  <span class="expand-icon">▶</span> 4. 조직의 상황 (Context)
+                </div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '4.1')"><span class="clause-number">4.1</span> 조직과 상황의 이해</div>
+                  <div class="clause-item" onclick="selectClause(this, '4.2')"><span class="clause-number">4.2</span> 이해관계자의 니즈와 기대</div>
+                  <div class="clause-item" onclick="selectClause(this, '4.3')"><span class="clause-number">4.3</span> QMS 적용 범위 결정</div>
+                  <div class="clause-item" onclick="selectClause(this, '4.4')"><span class="clause-number">4.4</span> QMS와 프로세스</div>
+                </div>
+              </div>
+              <!-- Section 5 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 5. 리더십 (Leadership)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '5.1')"><span class="clause-number">5.1</span> 리더십과 의지</div>
+                  <div class="clause-item" onclick="selectClause(this, '5.2')"><span class="clause-number">5.2</span> 품질 방침</div>
+                  <div class="clause-item" onclick="selectClause(this, '5.3')"><span class="clause-number">5.3</span> 조직의 역할, 책임, 권한</div>
+                </div>
+              </div>
+              <!-- Section 6 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 6. 기획 (Planning)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '6.1')"><span class="clause-number">6.1</span> 리스크와 기회를 다루는 조치</div>
+                  <div class="clause-item" onclick="selectClause(this, '6.2')"><span class="clause-number">6.2</span> 품질 목표</div>
+                  <div class="clause-item" onclick="selectClause(this, '6.3')"><span class="clause-number">6.3</span> 변경의 기획</div>
+                </div>
+              </div>
+              <!-- Section 7 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 7. 지원 (Support)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '7.1')"><span class="clause-number">7.1</span> 자원</div>
+                  <div class="clause-item" onclick="selectClause(this, '7.2')"><span class="clause-number">7.2</span> 적격성 (Competence)</div>
+                  <div class="clause-item" onclick="selectClause(this, '7.3')"><span class="clause-number">7.3</span> 인식 (Awareness)</div>
+                  <div class="clause-item" onclick="selectClause(this, '7.4')"><span class="clause-number">7.4</span> 의사소통</div>
+                  <div class="clause-item" onclick="selectClause(this, '7.5')"><span class="clause-number">7.5</span> 문서화된 정보</div>
+                </div>
+              </div>
+              <!-- Section 8 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 8. 운용 (Operation)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item active" onclick="selectClause(this, '8.1')"><span class="clause-number">8.1</span> 운용 기획 및 관리</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.2')"><span class="clause-number">8.2</span> 제품/서비스 요구사항</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.3')"><span class="clause-number">8.3</span> 설계 및 개발</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.4')"><span class="clause-number">8.4</span> 외부 공급 프로세스</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.5')"><span class="clause-number">8.5</span> 생산 및 서비스 제공</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.6')"><span class="clause-number">8.6</span> 제품/서비스 불출</div>
+                  <div class="clause-item" onclick="selectClause(this, '8.7')"><span class="clause-number">8.7</span> 부적합 출력의 관리</div>
+                </div>
+              </div>
+              <!-- Section 9 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 9. 성과 평가 (Evaluation)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '9.1')"><span class="clause-number">9.1</span> 모니터링, 측정, 분석, 평가</div>
+                  <div class="clause-item" onclick="selectClause(this, '9.2')"><span class="clause-number">9.2</span> 내부심사</div>
+                  <div class="clause-item" onclick="selectClause(this, '9.3')"><span class="clause-number">9.3</span> 경영검토</div>
+                </div>
+              </div>
+              <!-- Section 10 -->
+              <div class="clause-group">
+                <div class="clause-group-header" onclick="toggleClause(this)"><span class="expand-icon">▶</span> 10. 개선 (Improvement)</div>
+                <div class="clause-group-items">
+                  <div class="clause-item" onclick="selectClause(this, '10.1')"><span class="clause-number">10.1</span> 일반사항</div>
+                  <div class="clause-item" onclick="selectClause(this, '10.2')"><span class="clause-number">10.2</span> 부적합 및 시정조치</div>
+                  <div class="clause-item" onclick="selectClause(this, '10.3')"><span class="clause-number">10.3</span> 지속적 개선</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clause Detail -->
+            <div class="clause-detail" id="clauseDetail">
+              <div class="clause-detail-title">📌 8.1 운용 기획 및 관리</div>
+              <div class="clause-detail-text">
+                조직은 제품 및 서비스 제공에 필요한 프로세스를 기획, 실행 및 관리하여야 한다.
+                프로세스 기준의 수립, 기준에 따른 관리의 실행, 계획된 변경의 관리가 요구된다.
+              </div>
+              <div class="clause-tags">
+                <span class="badge badge-accent">심사 포인트</span>
+                <span class="badge badge-info">공정 관리</span>
+                <span class="badge badge-warning">변경 관리</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ CENTER: Main Work Area ═══ -->
+        <div class="ws-panel">
+          <div class="work-tabs">
+            <div class="work-tab active" onclick="switchWorkTab(this, 'questions')">🤖 AI 질문 생성</div>
+            <div class="work-tab" onclick="switchWorkTab(this, 'evidence')">🔍 Evidence 분석</div>
+            <div class="work-tab" onclick="switchWorkTab(this, 'audit-notes')">📝 심사 메모</div>
+          </div>
+          <div class="work-content">
+            <!-- Questions Tab -->
+            <div class="work-section active" id="section-questions">
+              <div class="question-config">
+                <div class="form-group">
+                  <label class="form-label">공정 / 프로세스</label>
+                  <select class="form-select">
+                    <option>Wafer FAB — Lithography</option>
+                    <option>Wafer FAB — Etching</option>
+                    <option>Wafer FAB — Diffusion</option>
+                    <option>Assembly — Wire Bonding</option>
+                    <option>Final Test — Electrical Test</option>
+                    <option>일반 제조 공정</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">산업군</label>
+                  <select class="form-select">
+                    <option>반도체 (Semiconductor)</option>
+                    <option>자동차 (Automotive)</option>
+                    <option>항공우주 (Aerospace)</option>
+                    <option>의료기기 (Medical Device)</option>
+                    <option>일반 제조업</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-accent" style="width:100%;margin-bottom:var(--space-5);" onclick="generateQuestions()">
+                🤖 AI 심사 질문 생성
+              </button>
+              <div id="questionResults">
+                <!-- 기본 질문 -->
+                <div class="question-category">
+                  <div class="question-category-title">📋 기본 질문 (Basic Questions)</div>
+                  <div class="generated-questions">
+                    <div class="question-item"><span class="q-number">1</span><span class="q-text">Lithography 공정의 작업표준서(WI)는 최신 개정본으로 관리되고 있습니까?</span></div>
+                    <div class="question-item"><span class="q-number">2</span><span class="q-text">해당 공정의 운용 기준(Process Parameter)은 어떻게 설정되었으며, 근거는 무엇입니까?</span></div>
+                    <div class="question-item"><span class="q-number">3</span><span class="q-text">공정 변경 시 변경 관리 절차에 따라 사전 승인이 이루어지고 있습니까?</span></div>
+                  </div>
+                </div>
+                <!-- 심화 질문 -->
+                <div class="question-category">
+                  <div class="question-category-title">🔬 심화 질문 (Deep-Dive Questions)</div>
+                  <div class="generated-questions">
+                    <div class="question-item"><span class="q-number">4</span><span class="q-text">Critical Dimension (CD) 측정 데이터의 SPC 관리도에서 최근 3개월간 Out-of-Control 발생 건은?</span></div>
+                    <div class="question-item"><span class="q-number">5</span><span class="q-text">Overlay Accuracy 관리 기준 설정의 통계적 근거(Cpk 값)를 설명해 주십시오.</span></div>
+                  </div>
+                </div>
+                <!-- 추적 질문 -->
+                <div class="question-category">
+                  <div class="question-category-title">🔗 추적 질문 (Follow-up Questions)</div>
+                  <div class="generated-questions">
+                    <div class="question-item"><span class="q-number">6</span><span class="q-text">해당 부적합 발생 시 8D Report가 작성되었습니까? 근본 원인 분석 방법은?</span></div>
+                    <div class="question-item"><span class="q-number">7</span><span class="q-text">시정조치의 효과성 검증은 어떻게 수행하였으며, 재발 방지 대책은?</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Evidence Tab -->
+            <div class="work-section" id="section-evidence">
+              <div class="evidence-upload-zone" onclick="document.getElementById('fileUpload').click()">
+                <div class="upload-icon">📎</div>
+                <div class="upload-text">심사 증거 자료를 업로드하세요</div>
+                <div class="upload-formats">PDF, PPT, DOCX, XLSX, IMAGE 지원</div>
+                <input type="file" id="fileUpload" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" style="display:none" onchange="handleFileUpload(this)">
+              </div>
+              <div class="evidence-list" id="evidenceList">
+                <div class="evidence-item">
+                  <span class="ev-icon">📄</span>
+                  <div class="ev-info"><div class="ev-name">Lithography_WI_Rev03.pdf</div><div class="ev-meta">2.3 MB · 2026.05.15 업로드</div></div>
+                  <div class="ev-status"><span class="badge badge-success">✓ 최신본</span></div>
+                </div>
+                <div class="evidence-item">
+                  <span class="ev-icon">📊</span>
+                  <div class="ev-info"><div class="ev-name">SPC_CD_Data_May2026.xlsx</div><div class="ev-meta">1.1 MB · 2026.06.01 업로드</div></div>
+                  <div class="ev-status"><span class="badge badge-warning">⚠ 검토 필요</span></div>
+                </div>
+                <div class="evidence-item">
+                  <span class="ev-icon">📋</span>
+                  <div class="ev-info"><div class="ev-name">Control_Plan_Litho_v5.docx</div><div class="ev-meta">856 KB · 2026.05.20 업로드</div></div>
+                  <div class="ev-status"><span class="badge badge-success">✓ 승인됨</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Audit Notes Tab -->
+            <div class="work-section" id="section-audit-notes">
+              <div class="form-group" style="margin-bottom: var(--space-4);">
+                <label class="form-label">심사 메모 (Audit Notes)</label>
+                <textarea class="form-textarea" id="auditNotes" rows="8" placeholder="심사 현장에서 관찰한 내용을 자유롭게 기록하세요...&#10;&#10;예) Lithography 공정에서 작업표준서 Rev.02를 사용 중이나, 최신본은 Rev.03임. 작업자는 개정 사실을 인지하지 못함. 교육 기록 확인 결과 최근 개정에 대한 교육이 미실시됨.">Lithography 공정에서 작업표준서 Rev.02를 사용 중이나, 최신본은 Rev.03임. 작업자는 개정 사실을 인지하지 못함. 교육 기록 확인 결과 최근 개정에 대한 교육이 미실시됨.</textarea>
+              </div>
+              <button class="btn btn-accent" style="width:100%;" onclick="generateNC()">
+                ⚠️ AI NC Statement 생성
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ RIGHT: NC Writer Panel ═══ -->
+        <div class="ws-panel">
+          <div class="ws-panel-header">
+            <span class="ws-panel-title"><span class="panel-icon">⚠️</span> Nonconformity Writer</span>
+            <span class="badge badge-danger">AI</span>
+          </div>
+          <div class="ws-panel-body">
+            <div class="nc-form">
+              <!-- NC Type -->
+              <div class="nc-type-select">
+                <div class="nc-type-btn active major" onclick="selectNCType(this, 'major')">🔴 Major NC</div>
+                <div class="nc-type-btn minor" onclick="selectNCType(this, 'minor')">🟡 Minor NC</div>
+                <div class="nc-type-btn ofi" onclick="selectNCType(this, 'ofi')">🔵 OFI</div>
+              </div>
+
+              <!-- NC Clause -->
+              <div class="form-group">
+                <label class="form-label">관련 조항</label>
+                <input class="form-input" value="ISO 9001:2015 § 7.5.3 — 문서화된 정보의 관리" readonly>
+              </div>
+
+              <!-- NC Output -->
+              <div class="nc-output" id="ncOutput">
+                <div class="nc-output-section">
+                  <div class="nc-output-label">Requirement (요구사항)</div>
+                  <div class="nc-output-text">ISO 9001:2015 §7.5.3에 따라, 조직은 문서화된 정보가 필요한 시점과 장소에서 사용 가능하고 적합한 상태를 보장해야 한다.</div>
+                </div>
+                <div class="nc-output-section">
+                  <div class="nc-output-label">Objective Evidence (객관적 증거)</div>
+                  <div class="nc-output-text">Lithography 공정 현장에서 작업표준서 Rev.02가 사용되고 있었으나, 최신본은 Rev.03 (2026.04.15 개정)으로 확인됨. 작업자 인터뷰 결과 개정 사실을 인지하지 못하고 있었으며, 교육 기록에도 해당 개정에 대한 교육 이력이 없음.</div>
+                </div>
+                <div class="nc-output-section">
+                  <div class="nc-output-label">Nonconformity Statement (부적합 진술)</div>
+                  <div class="nc-output-text" style="font-weight: var(--weight-semibold); color: var(--color-danger);">Lithography 공정에서 폐기(superseded)된 작업표준서(Rev.02)가 사용되고 있어, ISO 9001:2015 §7.5.3 '문서화된 정보의 관리' 요구사항에 부적합합니다.</div>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div style="display:flex;gap:var(--space-2);">
+                <button class="btn btn-primary btn-sm" style="flex:1;" onclick="saveNC()">💾 NC 저장</button>
+                <button class="btn btn-secondary btn-sm" style="flex:1;">📋 복사</button>
+                <button class="btn btn-ghost btn-sm">🔄</button>
+              </div>
+
+              <!-- Recent NCs -->
+              <div style="margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--color-border);">
+                <div style="font-size:var(--text-xs);font-weight:var(--weight-bold);color:var(--color-text-tertiary);margin-bottom:var(--space-3);">최근 발행 NC</div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+                  <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);background:var(--color-glass);border-radius:var(--radius-md);font-size:var(--text-xs);">
+                    <span class="badge badge-danger" style="font-size:10px;">Major</span>
+                    <span style="flex:1;color:var(--color-text-secondary);">§7.5.3 문서 관리</span>
+                    <span style="color:var(--color-text-tertiary);">방금 전</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);background:var(--color-glass);border-radius:var(--radius-md);font-size:var(--text-xs);">
+                    <span class="badge badge-warning" style="font-size:10px;">Minor</span>
+                    <span style="flex:1;color:var(--color-text-secondary);">§8.5.1 생산 관리</span>
+                    <span style="color:var(--color-text-tertiary);">1시간 전</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);background:var(--color-glass);border-radius:var(--radius-md);font-size:var(--text-xs);">
+                    <span class="badge badge-info" style="font-size:10px;">OFI</span>
+                    <span style="flex:1;color:var(--color-text-secondary);">§9.1.3 분석 및 평가</span>
+                    <span style="color:var(--color-text-tertiary);">2시간 전</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="workspace.html" class="bottom-nav-item active"><span class="nav-icon">🔍</span>Audit</a>
+    <a href="copilot.html" class="bottom-nav-item"><span class="nav-icon">🤖</span>AI</a>
+    <a href="knowledge-base.html" class="bottom-nav-item"><span class="nav-icon">📚</span>KB</a>
+    <a href="reports.html" class="bottom-nav-item"><span class="nav-icon">📄</span>Reports</a>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    // ── Theme ──
+    function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
+    const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
+
+    // ── Sidebar ──
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
+
+    // ── Standard selector ──
+    function selectStandard(btn){document.querySelectorAll('.ws-standard-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+
+    // ── Clause tree toggle ──
+    function toggleClause(header){header.parentElement.classList.toggle('open');}
+
+    // ── Clause select ──
+    function selectClause(item, num){
+      document.querySelectorAll('.clause-item').forEach(c=>c.classList.remove('active'));
+      item.classList.add('active');
+      const detail=document.getElementById('clauseDetail');
+      detail.querySelector('.clause-detail-title').textContent='📌 '+num+' '+item.textContent.trim().split(num)[1];
+    }
+
+    // ── Work tab switch ──
+    function switchWorkTab(tab, sectionId){
+      document.querySelectorAll('.work-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.work-section').forEach(s=>s.classList.remove('active'));
+      document.getElementById('section-'+sectionId).classList.add('active');
+    }
+
+    // ── NC Type ──
+    function selectNCType(btn, type){
+      document.querySelectorAll('.nc-type-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('major','minor','ofi');});
+      btn.classList.add('active',type);
+    }
+
+    // ── Generate Questions (demo) ──
+    function generateQuestions(){
+      const btn=event.target;btn.innerHTML='<span class="loading-spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;"></span> 생성 중...';btn.disabled=true;
+      setTimeout(()=>{btn.innerHTML='🤖 AI 심사 질문 생성';btn.disabled=false;},1500);
+    }
+
+    // ── Generate NC (demo) ──
+    function generateNC(){
+      const btn=event.target;btn.innerHTML='⏳ AI 분석 중...';btn.disabled=true;
+      setTimeout(()=>{btn.innerHTML='⚠️ AI NC Statement 생성';btn.disabled=false;document.getElementById('ncOutput').style.animation='fadeInUp 0.4s ease-out';},2000);
+    }
+
+    // ── File Upload ──
+    function handleFileUpload(input){
+      const list=document.getElementById('evidenceList');
+      Array.from(input.files).forEach(f=>{
+        const item=document.createElement('div');item.className='evidence-item';
+        item.innerHTML=`<span class="ev-icon">📎</span><div class="ev-info"><div class="ev-name">${f.name}</div><div class="ev-meta">${(f.size/1024/1024).toFixed(1)} MB · 방금 업로드</div></div><div class="ev-status"><span class="badge badge-warning">⏳ 분석 중</span></div>`;
+        list.prepend(item);
+      });
+    }
+
+    // ── Save NC ──
+    function saveNC(){alert('NC가 저장되었습니다. (데모)');}
+  </script>
+</body>
+</html>

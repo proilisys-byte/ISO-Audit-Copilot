@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin — 사용자 및 시스템 관리">
+  <title>Admin — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/admin.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo"><div class="logo-icon">AC</div><div class="logo-text"><span class="logo-name">Audit Copilot</span><span class="logo-subtitle">PRO ILI SMART</span></div></div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section"><div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+          <a href="workspace.html" class="nav-item"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <a href="copilot.html" class="nav-item"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item"><span class="nav-icon">📚</span><span class="nav-label">Knowledge Base</span></a>
+          <a href="reports.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-label">Report Center</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item active"><span class="nav-icon">⚙️</span><span class="nav-label">Admin</span></a>
+          <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div></div>
+    </aside>
+
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+        <h2 style="font-size:var(--text-h4);font-weight:var(--weight-bold);">Admin</h2>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='login.html'" style="color:var(--color-text-secondary);">로그아웃</button>
+      </div>
+    </header>
+
+    <main class="app-main page-enter">
+      <div class="page-header"><div><h1 class="page-title">시스템 관리</h1><p class="page-subtitle">사용자, 조직, 시스템 설정을 관리합니다</p></div></div>
+
+      <!-- Stats -->
+      <div class="admin-stat-grid" style="margin-bottom:var(--space-6);">
+        <div class="admin-stat"><div class="admin-stat-value">24</div><div class="admin-stat-label">Total Users</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">7</div><div class="admin-stat-label">Active Audits</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">13</div><div class="admin-stat-label">Open NC</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">5</div><div class="admin-stat-label">High Risk</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">98.2%</div><div class="admin-stat-label">Uptime</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">1.2GB</div><div class="admin-stat-label">Storage Used</div></div>
+      </div>
+
+      <div class="admin-grid">
+        <!-- Users Card -->
+        <div class="admin-card">
+          <div class="admin-card-title">👥 사용자 관리</div>
+          <div class="user-list">
+            <div class="user-item"><div class="avatar" style="background:var(--gradient-accent);">KJ</div><div class="user-item-info"><div class="user-item-name">김정호</div><div class="user-item-email">kim.jh@company.com · 선임심사원</div></div><span class="badge badge-accent">PRO</span></div>
+            <div class="user-item"><div class="avatar" style="background:var(--gradient-primary);">LH</div><div class="user-item-info"><div class="user-item-name">이현수</div><div class="user-item-email">lee.hs@company.com · 심사원</div></div><span class="badge badge-success">PRO</span></div>
+            <div class="user-item"><div class="avatar" style="background:var(--gradient-success);">PJ</div><div class="user-item-info"><div class="user-item-name">박지은</div><div class="user-item-email">park.je@company.com · 품질관리자</div></div><span class="badge badge-warning">FREE</span></div>
+            <div class="user-item"><div class="avatar" style="background:var(--gradient-warning);">CM</div><div class="user-item-info"><div class="user-item-name">최민수</div><div class="user-item-email">choi.ms@cert.org · 컨설턴트</div></div><span class="badge badge-accent">ENT</span></div>
+          </div>
+          <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:var(--space-4);">사용자 초대</button>
+        </div>
+
+        <!-- API Settings -->
+        <div class="admin-card">
+          <div class="admin-card-title">🔗 API 설정</div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">Google Apps Script URL</label>
+            <input class="form-input" value="https://script.google.com/macros/s/AKfycb..." readonly style="font-family:var(--font-mono);font-size:var(--text-xs);">
+          </div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">Google Sheet ID</label>
+            <input class="form-input" value="1a2B3c4D5e6F7g8H9i0J..." readonly style="font-family:var(--font-mono);font-size:var(--text-xs);">
+          </div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">AI API Key (GPT / Gemini)</label>
+            <input class="form-input" type="password" value="sk-xxxxxxxxxx" style="font-family:var(--font-mono);font-size:var(--text-xs);">
+          </div>
+          <button class="btn btn-primary btn-sm" style="width:100%;">설정 저장</button>
+        </div>
+
+        <!-- System Info -->
+        <div class="admin-card">
+          <div class="admin-card-title">📊 시스템 정보</div>
+          <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">플랫폼 버전</span><span style="font-weight:var(--weight-semibold);">v1.0.0-beta</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">배포 환경</span><span style="font-weight:var(--weight-semibold);">Vercel</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">백엔드</span><span style="font-weight:var(--weight-semibold);">Google Apps Script</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">데이터베이스</span><span style="font-weight:var(--weight-semibold);">Google Sheets</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">마지막 동기화</span><span style="font-weight:var(--weight-semibold);">2026.06.03 10:15</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-sm);"><span style="color:var(--color-text-secondary);">다음 백업</span><span style="font-weight:var(--weight-semibold);">자동 (매일 02:00)</span></div>
+          </div>
+        </div>
+
+        <!-- Audit Settings -->
+        <div class="admin-card">
+          <div class="admin-card-title">⚙️ 심사 설정</div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">기본 규격</label>
+            <select class="form-select"><option>ISO 9001:2015</option><option>ISO 14001:2015</option><option>ISO 45001:2018</option><option>IATF 16949:2016</option></select>
+          </div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">RPN 위험 기준값</label>
+            <input class="form-input" type="number" value="200">
+          </div>
+          <div class="form-group" style="margin-bottom:var(--space-3);">
+            <label class="form-label">CAPA 기본 기한 (일)</label>
+            <input class="form-input" type="number" value="30">
+          </div>
+          <button class="btn btn-primary btn-sm" style="width:100%;">설정 저장</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="workspace.html" class="bottom-nav-item"><span class="nav-icon">🔍</span>Audit</a>
+    <a href="copilot.html" class="bottom-nav-item"><span class="nav-icon">🤖</span>AI</a>
+    <a href="knowledge-base.html" class="bottom-nav-item"><span class="nav-icon">📚</span>KB</a>
+    <a href="reports.html" class="bottom-nav-item"><span class="nav-icon">📄</span>Reports</a>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
+    const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
+  </script>
+</body>
+</html>

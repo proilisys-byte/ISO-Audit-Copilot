@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Audit Copilot Dashboard — 심사 현황, KPI, 리스크 히트맵">
+  <title>Dashboard — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+</head>
+<body>
+
+  <div class="app-layout" id="appLayout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">AC</div>
+        <div class="logo-text">
+          <span class="logo-name">Audit Copilot</span>
+          <span class="logo-subtitle">PRO ILI SMART</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item active">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Dashboard</span>
+          </a>
+          <a href="workspace.html" class="nav-item">
+            <span class="nav-icon">🔍</span>
+            <span class="nav-label">Audit Workspace</span>
+          </a>
+          <a href="copilot.html" class="nav-item">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-label">AI Copilot</span>
+            <span class="nav-badge">AI</span>
+          </a>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">Knowledge Base</span>
+          </a>
+          <a href="reports.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Report Center</span>
+          </a>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Admin</span>
+          </a>
+          <a href="subscription.html" class="nav-item">
+            <span class="nav-icon">💎</span>
+            <span class="nav-label">Subscription</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user" id="sidebarUser">
+          <div class="avatar">DA</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name" id="userName">Demo Auditor</div>
+            <div class="sidebar-user-role" id="userRole">선임심사원 · PRO</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <div class="header-search desktop-only">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="규격, 조항, 프로세스 검색..." id="globalSearch">
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()" title="테마 전환">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="header-notification">
+          <button class="btn btn-icon btn-ghost">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <span class="notification-badge">3</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="handleLogout()" style="color: var(--color-text-secondary);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          로그아웃
+        </button>
+      </div>
+    </header>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="app-main page-enter">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-subtitle">심사 현황을 한눈에 파악하세요</p>
+        </div>
+        <div style="display: flex; gap: var(--space-3);">
+          <a href="workspace.html" class="btn btn-accent hover-shine">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            새 심사 시작
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card primary" data-animate>
+          <div class="kpi-icon primary">📋</div>
+          <div class="kpi-info">
+            <div class="kpi-label">진행중 Audit</div>
+            <div class="kpi-value">7</div>
+            <span class="kpi-change up">↑ 2건 (이번 주)</span>
+          </div>
+        </div>
+        <div class="kpi-card success" data-animate data-delay="100">
+          <div class="kpi-icon success">✅</div>
+          <div class="kpi-info">
+            <div class="kpi-label">완료 Audit</div>
+            <div class="kpi-value">24</div>
+            <span class="kpi-change up">↑ 12% (전월 대비)</span>
+          </div>
+        </div>
+        <div class="kpi-card danger" data-animate data-delay="200">
+          <div class="kpi-icon danger">⚠️</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Open NC</div>
+            <div class="kpi-value">13</div>
+            <span class="kpi-change down">↑ 3건 (미종결)</span>
+          </div>
+        </div>
+        <div class="kpi-card warning" data-animate data-delay="300">
+          <div class="kpi-icon warning">🔥</div>
+          <div class="kpi-info">
+            <div class="kpi-label">High Risk</div>
+            <div class="kpi-value">5</div>
+            <span class="kpi-change down">RPN ≥ 200</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Left: Audit List + Activity -->
+        <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <!-- Recent Audits -->
+          <div class="dashboard-card" data-animate>
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">최근 심사 (Recent Audits)</h3>
+              <a href="workspace.html" class="btn btn-ghost btn-sm">전체 보기 →</a>
+            </div>
+            <div class="audit-table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>심사 ID</th>
+                    <th>규격</th>
+                    <th>범위</th>
+                    <th>유형</th>
+                    <th>상태</th>
+                    <th>날짜</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>AUD-2026-001</strong></td>
+                    <td><span class="badge badge-primary">ISO 9001</span></td>
+                    <td>반도체 Wafer FAB</td>
+                    <td>정기심사</td>
+                    <td><span class="audit-status in-progress"><span class="status-dot warning"></span>진행중</span></td>
+                    <td>2026.06.03</td>
+                  </tr>
+                  <tr>
+                    <td><strong>AUD-2026-002</strong></td>
+                    <td><span class="badge badge-accent">IATF 16949</span></td>
+                    <td>자동차 부품 생산라인</td>
+                    <td>사후심사</td>
+                    <td><span class="audit-status planned"><span class="status-dot active"></span>계획됨</span></td>
+                    <td>2026.06.10</td>
+                  </tr>
+                  <tr>
+                    <td><strong>AUD-2026-003</strong></td>
+                    <td><span class="badge badge-success">ISO 14001</span></td>
+                    <td>환경경영시스템</td>
+                    <td>갱신심사</td>
+                    <td><span class="audit-status completed"><span class="status-dot active"></span>완료</span></td>
+                    <td>2026.05.28</td>
+                  </tr>
+                  <tr>
+                    <td><strong>AUD-2026-004</strong></td>
+                    <td><span class="badge badge-warning">ISO 45001</span></td>
+                    <td>안전보건경영</td>
+                    <td>내부심사</td>
+                    <td><span class="audit-status completed"><span class="status-dot active"></span>완료</span></td>
+                    <td>2026.05.25</td>
+                  </tr>
+                  <tr>
+                    <td><strong>AUD-2026-005</strong></td>
+                    <td><span class="badge badge-info">AS9100</span></td>
+                    <td>항공우주 품질</td>
+                    <td>초도심사</td>
+                    <td><span class="audit-status planned"><span class="status-dot active"></span>계획됨</span></td>
+                    <td>2026.06.15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Activities -->
+          <div class="dashboard-card" data-animate data-delay="100">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">최근 활동 (Activity Feed)</h3>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--color-danger-50);">⚠️</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>Major NC</strong> 발행 — ISO 9001 §8.5.1 생산 공정 관리</div>
+                  <div class="activity-time">10분 전</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--color-accent-50);">🤖</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>AI Copilot</strong>이 Wafer FAB 심사 질문 12건을 생성했습니다</div>
+                  <div class="activity-time">25분 전</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--color-success-50);">✅</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>CAPA #027</strong> 시정조치 완료 — Etching 공정 온도 편차</div>
+                  <div class="activity-time">1시간 전</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--color-info-50);">📄</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>심사 보고서</strong> PDF 생성 완료 — AUD-2026-003</div>
+                  <div class="activity-time">2시간 전</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" style="background: var(--color-warning-50);">🔥</div>
+                <div class="activity-content">
+                  <div class="activity-text"><strong>Risk Assessment</strong> 업데이트 — CMP 공정 RPN 320 → High Risk</div>
+                  <div class="activity-time">3시간 전</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Quick Actions + Widgets -->
+        <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <!-- Quick Actions -->
+          <div class="dashboard-card" data-animate data-delay="200">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">Quick Actions</h3>
+            </div>
+            <div class="quick-actions">
+              <div class="quick-action-btn" onclick="window.location.href='copilot.html'">
+                <span class="action-icon">🤖</span>
+                AI 질문 생성
+              </div>
+              <div class="quick-action-btn" onclick="window.location.href='workspace.html'">
+                <span class="action-icon">📋</span>
+                새 심사
+              </div>
+              <div class="quick-action-btn" onclick="window.location.href='reports.html'">
+                <span class="action-icon">⚠️</span>
+                NC 작성
+              </div>
+              <div class="quick-action-btn" onclick="window.location.href='knowledge-base.html'">
+                <span class="action-icon">📚</span>
+                Knowledge Base
+              </div>
+              <div class="quick-action-btn" onclick="window.location.href='reports.html'">
+                <span class="action-icon">📊</span>
+                Risk Assessment
+              </div>
+              <div class="quick-action-btn" onclick="window.location.href='reports.html'">
+                <span class="action-icon">📄</span>
+                보고서 생성
+              </div>
+            </div>
+          </div>
+
+          <!-- Risk Heat Map -->
+          <div class="dashboard-card" data-animate data-delay="300">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">Risk Heat Map</h3>
+              <span class="badge badge-danger">5 High Risk</span>
+            </div>
+            <div style="margin-bottom: var(--space-3);">
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--color-text-tertiary); margin-bottom: var(--space-2);">
+                <span>Detection →</span>
+              </div>
+              <div class="mini-heatmap" id="heatmap">
+                <!-- Generated by JS -->
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: var(--space-2);">
+                <span>Low</span>
+                <span>← Severity</span>
+                <span>High</span>
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--space-3); font-size: var(--text-xs); color: var(--color-text-tertiary); flex-wrap: wrap;">
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(5,150,105,0.2)"></span>Low</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(5,150,105,0.4)"></span>Medium</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(217,119,6,0.4)"></span>High</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(220,38,38,0.7)"></span>Critical</span>
+            </div>
+          </div>
+
+          <!-- COPQ Widget -->
+          <div class="dashboard-card" data-animate data-delay="400">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">Quality To Profit</h3>
+              <span class="badge badge-warning">COPQ</span>
+            </div>
+            <div class="copq-widget">
+              <div>
+                <div class="copq-item">
+                  <span class="copq-label">🗑️ Scrap Cost</span>
+                  <span class="copq-value">₩12.5M</span>
+                </div>
+                <div class="copq-bar"><div class="copq-bar-fill" style="width: 65%; background: var(--gradient-danger);"></div></div>
+              </div>
+              <div>
+                <div class="copq-item">
+                  <span class="copq-label">🔄 Rework Cost</span>
+                  <span class="copq-value">₩8.3M</span>
+                </div>
+                <div class="copq-bar"><div class="copq-bar-fill" style="width: 45%; background: var(--gradient-warning);"></div></div>
+              </div>
+              <div>
+                <div class="copq-item">
+                  <span class="copq-label">📨 Claim Cost</span>
+                  <span class="copq-value">₩3.2M</span>
+                </div>
+                <div class="copq-bar"><div class="copq-bar-fill" style="width: 20%; background: var(--gradient-accent);"></div></div>
+              </div>
+              <div>
+                <div class="copq-item">
+                  <span class="copq-label">💡 Opportunity Cost</span>
+                  <span class="copq-value">₩5.7M</span>
+                </div>
+                <div class="copq-bar"><div class="copq-bar-fill" style="width: 35%; background: var(--gradient-primary);"></div></div>
+              </div>
+              <div style="padding-top: var(--space-3); border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-text);">Total COPQ</span>
+                <span style="font-size: var(--text-h3); font-weight: var(--weight-extrabold); color: var(--color-danger);">₩29.7M</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ═══ Mobile Bottom Nav ═══ -->
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item active">
+      <span class="nav-icon">📊</span>
+      Dashboard
+    </a>
+    <a href="workspace.html" class="bottom-nav-item">
+      <span class="nav-icon">🔍</span>
+      Audit
+    </a>
+    <a href="copilot.html" class="bottom-nav-item">
+      <span class="nav-icon">🤖</span>
+      AI Copilot
+    </a>
+    <a href="knowledge-base.html" class="bottom-nav-item">
+      <span class="nav-icon">📚</span>
+      Knowledge
+    </a>
+    <a href="reports.html" class="bottom-nav-item">
+      <span class="nav-icon">📄</span>
+      Reports
+    </a>
+  </nav>
+
+  <!-- ═══ Sidebar Overlay ═══ -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    // ── Session Check ──
+    (function() {
+      const session = JSON.parse(localStorage.getItem('audit_session') || 'null');
+      if (session && session.user) {
+        const user = session.user;
+        const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        document.querySelector('#sidebarUser .avatar').textContent = initials;
+        document.getElementById('userName').textContent = user.name;
+        const roleMap = {
+          'auditor': '심사원',
+          'lead-auditor': '선임심사원',
+          'consultant': '컨설턴트',
+          'quality-manager': '품질관리자'
+        };
+        const planLabel = (user.plan || 'free').toUpperCase();
+        document.getElementById('userRole').textContent = `${roleMap[user.role] || user.role} · ${planLabel}`;
+      }
+    })();
+
+    // ── Theme Toggle ──
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      localStorage.setItem('audit_theme', html.getAttribute('data-theme'));
+    }
+
+    // Restore theme
+    const savedTheme = localStorage.getItem('audit_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    // ── Sidebar Toggle ──
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+
+    // ── Logout ──
+    function handleLogout() {
+      localStorage.removeItem('audit_session');
+      window.location.href = 'login.html';
+    }
+
+    // ── Generate Heat Map ──
+    (function() {
+      const heatmap = document.getElementById('heatmap');
+      const levels = [
+        [0,1,1,2,3], [1,1,2,3,4], [1,2,3,4,4],
+        [2,3,3,4,5], [3,3,4,5,5]
+      ];
+      levels.forEach(row => {
+        row.forEach(level => {
+          const cell = document.createElement('div');
+          cell.className = `heatmap-cell level-${level}`;
+          heatmap.appendChild(cell);
+        });
+      });
+    })();
+
+    // ── Scroll Animations ──
+    const animateElements = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    animateElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

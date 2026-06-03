@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "id": "link-001",
+      "category": "certification-bodies",
+      "title": "한국인정기구 (KAB)",
+      "url": "https://www.kab.or.kr",
+      "description": "대한민국 공식 인정기구 — 인증기관 인정 및 관리"
+    },
+    {
+      "id": "link-002",
+      "category": "certification-bodies",
+      "title": "한국품질재단 (KFQ)",
+      "url": "https://www.kfq.or.kr",
+      "description": "ISO 인증심사, 교육, 컨설팅 서비스"
+    },
+    {
+      "id": "link-003",
+      "category": "iso-guides",
+      "title": "ISO — International Organization for Standardization",
+      "url": "https://www.iso.org",
+      "description": "국제표준화기구 공식 사이트 — 규격 원문 및 업데이트"
+    },
+    {
+      "id": "link-004",
+      "category": "quality-blogs",
+      "title": "ASQ — American Society for Quality",
+      "url": "https://asq.org",
+      "description": "품질 관련 글로벌 전문 기관 — 자료, 인증, 교육"
+    }
+  ]
+}

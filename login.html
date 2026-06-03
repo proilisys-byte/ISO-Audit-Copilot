@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PRO ILI SMART Audit Copilot — 로그인 및 회원가입">
+  <title>로그인 — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/login.css">
+</head>
+<body>
+
+  <!-- ═══ Back Link ═══ -->
+  <a href="index.html" class="back-to-landing">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    홈으로
+  </a>
+
+  <!-- ═══ Decorative Orbs ═══ -->
+  <div class="login-page">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="auth-container">
+      <div class="auth-card">
+        <!-- Logo -->
+        <a href="index.html" class="auth-logo">
+          <div class="logo-icon">AC</div>
+          <div class="logo-text">Audit Copilot</div>
+        </a>
+
+        <!-- ═══ Login Panel ═══ -->
+        <div id="loginPanel" class="auth-panel active">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">계정에 로그인하여 심사를 시작하세요</p>
+
+          <div id="loginMessage" class="auth-message"></div>
+
+          <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label class="form-label" for="loginEmail">이메일</label>
+              <input type="email" id="loginEmail" class="form-input" placeholder="auditor@company.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="loginPassword">비밀번호</label>
+              <input type="password" id="loginPassword" class="form-input" placeholder="비밀번호를 입력하세요" required autocomplete="current-password">
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--color-text-secondary); cursor: pointer;">
+                <input type="checkbox" id="rememberMe" style="accent-color: var(--color-accent);"> 로그인 유지
+              </label>
+              <a href="#" style="font-size: var(--text-sm); color: var(--color-accent);">비밀번호 찾기</a>
+            </div>
+            <button type="submit" class="btn btn-accent btn-submit hover-shine" id="loginBtn">
+              로그인
+            </button>
+          </form>
+
+          <div class="auth-divider">
+            <span>또는</span>
+          </div>
+
+          <button class="btn btn-secondary" style="width: 100%; padding: var(--space-3);" onclick="showDemoLogin()">
+            🚀 데모 계정으로 체험하기
+          </button>
+
+          <div class="auth-switch">
+            계정이 없으신가요? <a onclick="switchPanel('register')">회원가입</a>
+          </div>
+        </div>
+
+        <!-- ═══ Register Panel ═══ -->
+        <div id="registerPanel" class="auth-panel">
+          <h1 class="auth-title">Create Account</h1>
+          <p class="auth-subtitle">무료로 가입하고 AI 심사를 시작하세요</p>
+
+          <div id="registerMessage" class="auth-message"></div>
+
+          <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-group">
+              <label class="form-label" for="regName">이름 <span class="required">*</span></label>
+              <input type="text" id="regName" class="form-input" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regEmail">이메일 <span class="required">*</span></label>
+              <input type="email" id="regEmail" class="form-input" placeholder="auditor@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regPassword">비밀번호 <span class="required">*</span></label>
+              <input type="password" id="regPassword" class="form-input" placeholder="8자 이상 영문/숫자/특수문자" required minlength="8" oninput="updatePasswordStrength(this.value)">
+              <div class="password-strength">
+                <div class="strength-bar" id="str1"></div>
+                <div class="strength-bar" id="str2"></div>
+                <div class="strength-bar" id="str3"></div>
+                <div class="strength-bar" id="str4"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regOrg">조직명</label>
+              <input type="text" id="regOrg" class="form-input" placeholder="회사명 또는 인증기관명">
+            </div>
+            <div class="form-group">
+              <label class="form-label">역할 선택 <span class="required">*</span></label>
+              <div class="role-select">
+                <label class="role-option selected" onclick="selectRole(this)">
+                  <input type="radio" name="role" value="auditor" checked>
+                  <span class="role-check"></span>
+                  심사원
+                </label>
+                <label class="role-option" onclick="selectRole(this)">
+                  <input type="radio" name="role" value="lead-auditor">
+                  <span class="role-check"></span>
+                  선임심사원
+                </label>
+                <label class="role-option" onclick="selectRole(this)">
+                  <input type="radio" name="role" value="consultant">
+                  <span class="role-check"></span>
+                  컨설턴트
+                </label>
+                <label class="role-option" onclick="selectRole(this)">
+                  <input type="radio" name="role" value="quality-manager">
+                  <span class="role-check"></span>
+                  품질관리자
+                </label>
+              </div>
+            </div>
+
+            <label style="display: flex; align-items: flex-start; gap: 8px; font-size: var(--text-xs); color: var(--color-text-secondary); cursor: pointer;">
+              <input type="checkbox" id="agreeTerms" required style="accent-color: var(--color-accent); margin-top: 2px;">
+              <span><a href="#" style="color: var(--color-accent);">이용약관</a> 및 <a href="#" style="color: var(--color-accent);">개인정보처리방침</a>에 동의합니다.</span>
+            </label>
+
+            <button type="submit" class="btn btn-accent btn-submit hover-shine" id="registerBtn">
+              무료 계정 생성
+            </button>
+          </form>
+
+          <div class="auth-switch">
+            이미 계정이 있으신가요? <a onclick="switchPanel('login')">로그인</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Panel Switch ──
+    function switchPanel(panel) {
+      document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(panel + 'Panel').classList.add('active');
+      clearMessages();
+    }
+
+    // ── Check URL Hash ──
+    if (window.location.hash === '#register') {
+      switchPanel('register');
+    }
+
+    // ── Role Selection ──
+    function selectRole(el) {
+      document.querySelectorAll('.role-option').forEach(r => r.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input').checked = true;
+    }
+
+    // ── Password Strength ──
+    function updatePasswordStrength(password) {
+      const bars = [
+        document.getElementById('str1'),
+        document.getElementById('str2'),
+        document.getElementById('str3'),
+        document.getElementById('str4')
+      ];
+
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+
+      const levelClass = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
+
+      bars.forEach((bar, i) => {
+        bar.className = 'strength-bar';
+        if (i < score) {
+          bar.classList.add('active', levelClass);
+        }
+      });
+    }
+
+    // ── Show Message ──
+    function showMessage(panelId, type, text) {
+      const msgEl = document.getElementById(panelId + 'Message');
+      msgEl.className = `auth-message show ${type}`;
+      msgEl.innerHTML = `${type === 'success' ? '✅' : '❌'} ${text}`;
+    }
+
+    function clearMessages() {
+      document.querySelectorAll('.auth-message').forEach(m => {
+        m.className = 'auth-message';
+        m.innerHTML = '';
+      });
+    }
+
+    // ── SHA-256 Hash (Web Crypto API) ──
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ── Google Apps Script API URL ──
+    // TODO: 배포 후 실제 URL로 교체
+    const API_BASE_URL = '';
+
+    // ── Login Handler ──
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      btn.innerHTML = '<span class="loading-spinner" style="width:20px;height:20px;border-width:2px;"></span> 로그인 중...';
+      btn.disabled = true;
+
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        if (API_BASE_URL) {
+          // 실제 API 호출
+          const passwordHash = await sha256(password);
+          const response = await fetch(`${API_BASE_URL}?action=login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password_hash: passwordHash })
+          });
+          const data = await response.json();
+
+          if (data.success) {
+            localStorage.setItem('audit_session', JSON.stringify({
+              token: data.token,
+              user: data.user
+            }));
+            showMessage('login', 'success', '로그인 성공! Dashboard로 이동합니다.');
+            setTimeout(() => window.location.href = 'dashboard.html', 1000);
+          } else {
+            showMessage('login', 'error', data.message || '이메일 또는 비밀번호가 올바르지 않습니다.');
+          }
+        } else {
+          // 데모 모드 — localStorage에서 사용자 확인
+          const users = JSON.parse(localStorage.getItem('audit_users') || '[]');
+          const passwordHash = await sha256(password);
+          const user = users.find(u => u.email === email && u.password_hash === passwordHash);
+
+          if (user) {
+            const session = {
+              token: 'demo-' + Date.now(),
+              user: { id: user.id, name: user.name, email: user.email, role: user.role, plan: user.plan }
+            };
+            localStorage.setItem('audit_session', JSON.stringify(session));
+            showMessage('login', 'success', '로그인 성공! Dashboard로 이동합니다.');
+            setTimeout(() => window.location.href = 'dashboard.html', 1000);
+          } else {
+            showMessage('login', 'error', '이메일 또는 비밀번호가 올바르지 않습니다.');
+          }
+        }
+      } catch (err) {
+        showMessage('login', 'error', '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      }
+
+      btn.innerHTML = '로그인';
+      btn.disabled = false;
+    }
+
+    // ── Register Handler ──
+    async function handleRegister(e) {
+      e.preventDefault();
+      const btn = document.getElementById('registerBtn');
+      btn.innerHTML = '<span class="loading-spinner" style="width:20px;height:20px;border-width:2px;"></span> 가입 중...';
+      btn.disabled = true;
+
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const org = document.getElementById('regOrg').value;
+      const role = document.querySelector('input[name="role"]:checked').value;
+
+      try {
+        const passwordHash = await sha256(password);
+
+        if (API_BASE_URL) {
+          const response = await fetch(`${API_BASE_URL}?action=register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password_hash: passwordHash, org, role })
+          });
+          const data = await response.json();
+
+          if (data.success) {
+            showMessage('register', 'success', '회원가입 완료! 로그인 페이지로 이동합니다.');
+            setTimeout(() => switchPanel('login'), 1500);
+          } else {
+            showMessage('register', 'error', data.message || '회원가입에 실패했습니다.');
+          }
+        } else {
+          // 데모 모드 — localStorage에 저장
+          const users = JSON.parse(localStorage.getItem('audit_users') || '[]');
+
+          if (users.find(u => u.email === email)) {
+            showMessage('register', 'error', '이미 등록된 이메일입니다.');
+          } else {
+            const newUser = {
+              id: 'user-' + Date.now(),
+              name,
+              email,
+              password_hash: passwordHash,
+              org,
+              role,
+              plan: 'free',
+              created_at: new Date().toISOString()
+            };
+            users.push(newUser);
+            localStorage.setItem('audit_users', JSON.stringify(users));
+            showMessage('register', 'success', '회원가입 완료! 로그인해 주세요.');
+            setTimeout(() => switchPanel('login'), 1500);
+          }
+        }
+      } catch (err) {
+        showMessage('register', 'error', '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      }
+
+      btn.innerHTML = '무료 계정 생성';
+      btn.disabled = false;
+    }
+
+    // ── Demo Login ──
+    function showDemoLogin() {
+      // 데모 계정 자동 생성 및 로그인
+      const demoUser = {
+        id: 'demo-user',
+        name: 'Demo Auditor',
+        email: 'demo@auditcopilot.com',
+        role: 'lead-auditor',
+        plan: 'pro'
+      };
+
+      const session = {
+        token: 'demo-' + Date.now(),
+        user: demoUser
+      };
+
+      localStorage.setItem('audit_session', JSON.stringify(session));
+      showMessage('login', 'success', '데모 계정으로 로그인합니다!');
+      setTimeout(() => window.location.href = 'dashboard.html', 800);
+    }
+  </script>
+
+</body>
+</html>

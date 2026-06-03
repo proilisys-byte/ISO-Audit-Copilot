@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Report Center — 심사 보고서, CAPA, 리스크 관리">
+  <title>Report Center — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/reports.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo"><div class="logo-icon">AC</div><div class="logo-text"><span class="logo-name">Audit Copilot</span><span class="logo-subtitle">PRO ILI SMART</span></div></div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section"><div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+          <a href="workspace.html" class="nav-item"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <a href="copilot.html" class="nav-item"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item"><span class="nav-icon">📚</span><span class="nav-label">Knowledge Base</span></a>
+          <a href="reports.html" class="nav-item active"><span class="nav-icon">📄</span><span class="nav-label">Report Center</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-label">Admin</span></a>
+          <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div></div>
+    </aside>
+
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+        <h2 style="font-size:var(--text-h4);font-weight:var(--weight-bold);">Report Center</h2>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='login.html'" style="color:var(--color-text-secondary);">로그아웃</button>
+      </div>
+    </header>
+
+    <main class="app-main page-enter">
+      <!-- Tab Navigation -->
+      <div class="reports-tabs">
+        <div class="reports-tab active" onclick="switchReportTab(this,'reports')">📄 Audit Reports</div>
+        <div class="reports-tab" onclick="switchReportTab(this,'nc')">⚠️ NC Management</div>
+        <div class="reports-tab" onclick="switchReportTab(this,'capa')">🔧 CAPA Tracker</div>
+        <div class="reports-tab" onclick="switchReportTab(this,'risk')">🔥 Risk Assessment</div>
+      </div>
+
+      <!-- ═══ Reports Section ═══ -->
+      <div class="reports-section active" id="section-reports">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-5);flex-wrap:wrap;gap:var(--space-3);">
+          <div style="display:flex;gap:var(--space-2);">
+            <select class="form-select" style="width:auto;padding:var(--space-2) var(--space-4);">
+              <option>전체 규격</option><option>ISO 9001</option><option>ISO 14001</option><option>IATF 16949</option>
+            </select>
+            <select class="form-select" style="width:auto;padding:var(--space-2) var(--space-4);">
+              <option>전체 상태</option><option>Draft</option><option>Review</option><option>Approved</option>
+            </select>
+          </div>
+          <button class="btn btn-accent btn-sm">📄 새 보고서 생성</button>
+        </div>
+
+        <div class="report-grid">
+          <div class="report-card">
+            <div class="report-card-header">
+              <span class="badge badge-primary">ISO 9001</span>
+              <span class="badge badge-success">Approved</span>
+            </div>
+            <div class="report-card-title">AUD-2026-003 심사 보고서</div>
+            <div class="report-card-meta">환경경영시스템 갱신심사 · 2026.05.28 · Major NC: 0 / Minor NC: 2 / OFI: 3</div>
+            <div class="report-card-actions">
+              <button class="btn btn-primary btn-sm">📥 PDF</button>
+              <button class="btn btn-secondary btn-sm">📋 DOCX</button>
+              <button class="btn btn-ghost btn-sm">👁️</button>
+            </div>
+          </div>
+          <div class="report-card">
+            <div class="report-card-header">
+              <span class="badge badge-accent">IATF 16949</span>
+              <span class="badge badge-warning">Draft</span>
+            </div>
+            <div class="report-card-title">AUD-2026-001 심사 보고서</div>
+            <div class="report-card-meta">반도체 Wafer FAB 정기심사 · 2026.06.03 · Major NC: 1 / Minor NC: 4 / OFI: 2</div>
+            <div class="report-card-actions">
+              <button class="btn btn-primary btn-sm">📥 PDF</button>
+              <button class="btn btn-secondary btn-sm">✏️ 편집</button>
+              <button class="btn btn-ghost btn-sm">👁️</button>
+            </div>
+          </div>
+          <div class="report-card">
+            <div class="report-card-header">
+              <span class="badge badge-warning">ISO 45001</span>
+              <span class="badge badge-success">Approved</span>
+            </div>
+            <div class="report-card-title">AUD-2026-004 심사 보고서</div>
+            <div class="report-card-meta">안전보건경영 내부심사 · 2026.05.25 · Major NC: 0 / Minor NC: 1 / OFI: 5</div>
+            <div class="report-card-actions">
+              <button class="btn btn-primary btn-sm">📥 PDF</button>
+              <button class="btn btn-secondary btn-sm">📋 DOCX</button>
+              <button class="btn btn-ghost btn-sm">📊 PPT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ NC Section ═══ -->
+      <div class="reports-section" id="section-nc">
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h3 class="dashboard-card-title">Nonconformity 현황</h3>
+            <button class="btn btn-accent btn-sm">⚠️ NC 등록</button>
+          </div>
+          <table class="table">
+            <thead><tr><th>NC ID</th><th>유형</th><th>규격/조항</th><th>요약</th><th>상태</th><th>발행일</th></tr></thead>
+            <tbody>
+              <tr><td><strong>NC-001</strong></td><td><span class="badge badge-danger">Major</span></td><td>§7.5.3</td><td>문서화된 정보 관리 부적합 — 폐기본 사용</td><td><span class="capa-status open">Open</span></td><td>2026.06.03</td></tr>
+              <tr><td><strong>NC-002</strong></td><td><span class="badge badge-warning">Minor</span></td><td>§8.5.1</td><td>공정 파라미터 관리 기준 불일치</td><td><span class="capa-status in-progress">CAPA 진행</span></td><td>2026.06.02</td></tr>
+              <tr><td><strong>NC-003</strong></td><td><span class="badge badge-warning">Minor</span></td><td>§7.2</td><td>교육훈련 기록 누락 (신규 작업자)</td><td><span class="capa-status in-progress">CAPA 진행</span></td><td>2026.06.01</td></tr>
+              <tr><td><strong>NC-004</strong></td><td><span class="badge badge-info">OFI</span></td><td>§9.1.3</td><td>데이터 분석 방법론 개선 권고</td><td><span class="capa-status closed">Closed</span></td><td>2026.05.28</td></tr>
+              <tr><td><strong>NC-005</strong></td><td><span class="badge badge-danger">Major</span></td><td>§8.4.2</td><td>공급업체 평가 미실시 (2차 공급자)</td><td><span class="capa-status closed">Closed</span></td><td>2026.05.25</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ CAPA Section ═══ -->
+      <div class="reports-section" id="section-capa">
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h3 class="dashboard-card-title">CAPA Tracker</h3>
+            <button class="btn btn-accent btn-sm">🔧 CAPA 등록</button>
+          </div>
+          <table class="table">
+            <thead><tr><th>CAPA ID</th><th>NC</th><th>분석 방법</th><th>근본 원인</th><th>담당자</th><th>기한</th><th>상태</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CAPA-027</strong></td><td>NC-002</td><td><span class="badge badge-accent">5 Why</span></td><td>PM 후 파라미터 검증 절차서 미비</td><td>김OO 엔지니어</td><td>2026.06.15</td><td><span class="capa-status in-progress">진행중</span></td></tr>
+              <tr><td><strong>CAPA-028</strong></td><td>NC-003</td><td><span class="badge badge-accent">Fishbone</span></td><td>신규 입사자 OJT 프로세스 누락</td><td>이OO 과장</td><td>2026.06.20</td><td><span class="capa-status open">Open</span></td></tr>
+              <tr><td><strong>CAPA-025</strong></td><td>NC-004</td><td><span class="badge badge-accent">FTA</span></td><td>데이터 분석 도구 미표준화</td><td>박OO 대리</td><td>2026.05.30</td><td><span class="capa-status closed">완료</span></td></tr>
+              <tr><td><strong>CAPA-024</strong></td><td>NC-005</td><td><span class="badge badge-accent">5 Why</span></td><td>2차 공급자 관리 절차 부재</td><td>최OO 부장</td><td>2026.06.05</td><td><span class="capa-status closed">완료</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ Risk Section ═══ -->
+      <div class="reports-section" id="section-risk">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);">
+          <!-- Heat Map -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">Risk Heat Map (Severity × Occurrence)</h3>
+            </div>
+            <div class="risk-heatmap-full">
+              <div class="axis-label"></div>
+              <div class="axis-label">1</div><div class="axis-label">2</div><div class="axis-label">3</div><div class="axis-label">4</div><div class="axis-label">5</div>
+              <div class="axis-label">5</div>
+              <div class="heat-cell med">5</div><div class="heat-cell high">10</div><div class="heat-cell high">15</div><div class="heat-cell crit">20</div><div class="heat-cell crit">25</div>
+              <div class="axis-label">4</div>
+              <div class="heat-cell low">4</div><div class="heat-cell med">8</div><div class="heat-cell high">12</div><div class="heat-cell high">16</div><div class="heat-cell crit">20</div>
+              <div class="axis-label">3</div>
+              <div class="heat-cell low">3</div><div class="heat-cell med">6</div><div class="heat-cell med">9</div><div class="heat-cell high">12</div><div class="heat-cell high">15</div>
+              <div class="axis-label">2</div>
+              <div class="heat-cell low">2</div><div class="heat-cell low">4</div><div class="heat-cell med">6</div><div class="heat-cell med">8</div><div class="heat-cell high">10</div>
+              <div class="axis-label">1</div>
+              <div class="heat-cell low">1</div><div class="heat-cell low">2</div><div class="heat-cell low">3</div><div class="heat-cell low">4</div><div class="heat-cell med">5</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:var(--space-3);">
+              <span>← Severity</span><span>Occurrence →</span>
+            </div>
+          </div>
+
+          <!-- FMEA Table -->
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h3 class="dashboard-card-title">High Risk Items (RPN ≥ 200)</h3>
+              <span class="badge badge-danger">5 항목</span>
+            </div>
+            <table class="table" style="font-size:var(--text-xs);">
+              <thead><tr><th>공정</th><th>Failure Mode</th><th>S</th><th>O</th><th>D</th><th>RPN</th></tr></thead>
+              <tbody>
+                <tr><td>CMP</td><td>Scratch 발생</td><td>8</td><td>6</td><td>7</td><td style="color:var(--color-danger);font-weight:bold;">336</td></tr>
+                <tr><td>Etching</td><td>Over-etch</td><td>9</td><td>5</td><td>6</td><td style="color:var(--color-danger);font-weight:bold;">270</td></tr>
+                <tr><td>Lithography</td><td>Overlay 불량</td><td>8</td><td>5</td><td>6</td><td style="color:var(--color-danger);font-weight:bold;">240</td></tr>
+                <tr><td>Diffusion</td><td>온도 편차</td><td>7</td><td>5</td><td>6</td><td style="color:var(--color-warning);font-weight:bold;">210</td></tr>
+                <tr><td>Thin Film</td><td>두께 불균일</td><td>7</td><td>5</td><td>6</td><td style="color:var(--color-warning);font-weight:bold;">210</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="workspace.html" class="bottom-nav-item"><span class="nav-icon">🔍</span>Audit</a>
+    <a href="copilot.html" class="bottom-nav-item"><span class="nav-icon">🤖</span>AI</a>
+    <a href="knowledge-base.html" class="bottom-nav-item"><span class="nav-icon">📚</span>KB</a>
+    <a href="reports.html" class="bottom-nav-item active"><span class="nav-icon">📄</span>Reports</a>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
+    const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
+
+    function switchReportTab(tab, sectionId){
+      document.querySelectorAll('.reports-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.reports-section').forEach(s=>s.classList.remove('active'));
+      document.getElementById('section-'+sectionId).classList.add('active');
+    }
+  </script>
+</body>
+</html>

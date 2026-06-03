@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Knowledge Base — ISO 심사 지식 관리">
+  <title>Knowledge Base — Audit Copilot</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/knowledge-base.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-logo"><div class="logo-icon">AC</div><div class="logo-text"><span class="logo-name">Audit Copilot</span><span class="logo-subtitle">PRO ILI SMART</span></div></div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section"><div class="sidebar-section-title">Main</div>
+          <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
+          <a href="workspace.html" class="nav-item"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <a href="copilot.html" class="nav-item"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Management</div>
+          <a href="knowledge-base.html" class="nav-item active"><span class="nav-icon">📚</span><span class="nav-label">Knowledge Base</span></a>
+          <a href="reports.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-label">Report Center</span></a>
+        </div>
+        <div class="sidebar-section"><div class="sidebar-section-title">Settings</div>
+          <a href="admin.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-label">Admin</span></a>
+          <a href="subscription.html" class="nav-item"><span class="nav-icon">💎</span><span class="nav-label">Subscription</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer"><div class="sidebar-user"><div class="avatar">DA</div><div class="sidebar-user-info"><div class="sidebar-user-name">Demo Auditor</div><div class="sidebar-user-role">선임심사원 · PRO</div></div></div></div>
+    </aside>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="app-header">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+        <h2 style="font-size:var(--text-h4);font-weight:var(--weight-bold);">Knowledge Base</h2>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button class="btn btn-ghost btn-sm" onclick="window.location.href='login.html'" style="color:var(--color-text-secondary);">로그아웃</button>
+      </div>
+    </header>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="app-main page-enter">
+      <div class="kb-layout">
+        <!-- ═══ Category Sidebar ═══ -->
+        <div class="kb-sidebar">
+          <div style="font-size:var(--text-xs);font-weight:var(--weight-bold);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--space-3);padding:0 var(--space-2);">카테고리</div>
+          <div class="kb-category-list">
+            <div class="kb-category active" onclick="filterKB(this,'all')"><span class="cat-icon">📚</span>전체 보기<span class="cat-count">35</span></div>
+            <div class="kb-category" onclick="filterKB(this,'iso')"><span class="cat-icon">📋</span>ISO 규격서<span class="cat-count">8</span></div>
+            <div class="kb-category" onclick="filterKB(this,'checklist')"><span class="cat-icon">✅</span>심사 체크리스트<span class="cat-count">6</span></div>
+            <div class="kb-category" onclick="filterKB(this,'cases')"><span class="cat-icon">📖</span>심사 사례집<span class="cat-count">5</span></div>
+            <div class="kb-category" onclick="filterKB(this,'manual')"><span class="cat-icon">📕</span>품질 매뉴얼<span class="cat-count">3</span></div>
+            <div class="kb-category" onclick="filterKB(this,'procedure')"><span class="cat-icon">📄</span>절차서<span class="cat-count">4</span></div>
+            <div class="kb-category" onclick="filterKB(this,'fmea')"><span class="cat-icon">🔥</span>FMEA 자료<span class="cat-count">3</span></div>
+            <div class="kb-category" onclick="filterKB(this,'cp')"><span class="cat-icon">📊</span>Control Plan<span class="cat-count">2</span></div>
+            <div class="kb-category" onclick="filterKB(this,'spc')"><span class="cat-icon">📈</span>SPC 자료<span class="cat-count">2</span></div>
+            <div class="kb-category" onclick="filterKB(this,'expert')"><span class="cat-icon">🧠</span>전문가 노하우<span class="cat-count">2</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ Content ═══ -->
+        <div class="kb-content">
+          <div class="kb-toolbar">
+            <div class="kb-search">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <input type="text" placeholder="규격, 체크리스트, 사례 검색..." id="kbSearchInput" oninput="searchKB(this.value)">
+            </div>
+            <div style="display:flex;gap:var(--space-2);">
+              <button class="btn btn-accent btn-sm" onclick="showUploadModal()">📤 자료 업로드</button>
+              <button class="btn btn-secondary btn-sm">🔗 참조 링크</button>
+            </div>
+          </div>
+
+          <div class="kb-grid" id="kbGrid">
+            <!-- ISO Standards -->
+            <div class="kb-card" data-cat="iso">
+              <div class="kb-card-header"><span class="kb-card-icon">📋</span><span class="badge badge-primary">ISO 9001</span></div>
+              <div class="kb-card-title">ISO 9001:2015 품질경영시스템 — 요구사항</div>
+              <div class="kb-card-desc">품질경영시스템의 요구사항을 규정한 국제표준. 조항 4~10의 전체 요구사항 및 심사 포인트를 포함합니다.</div>
+              <div class="kb-card-meta"><span>📎 PDF</span><span>•</span><span>42 페이지</span><span>•</span><span>2026.01.15</span></div>
+            </div>
+            <div class="kb-card" data-cat="iso">
+              <div class="kb-card-header"><span class="kb-card-icon">📋</span><span class="badge badge-accent">IATF 16949</span></div>
+              <div class="kb-card-title">IATF 16949:2016 자동차 품질경영시스템</div>
+              <div class="kb-card-desc">자동차 산업 품질경영시스템 요구사항. APQP, PPAP, FMEA, SPC, MSA 등 Core Tools을 포함합니다.</div>
+              <div class="kb-card-meta"><span>📎 PDF</span><span>•</span><span>68 페이지</span><span>•</span><span>2026.02.10</span></div>
+            </div>
+            <div class="kb-card" data-cat="iso">
+              <div class="kb-card-header"><span class="kb-card-icon">📋</span><span class="badge badge-success">ISO 14001</span></div>
+              <div class="kb-card-title">ISO 14001:2015 환경경영시스템</div>
+              <div class="kb-card-desc">환경경영시스템의 요구사항을 규정한 국제표준. 환경 측면, 준수 의무, 운용 관리를 포함합니다.</div>
+              <div class="kb-card-meta"><span>📎 PDF</span><span>•</span><span>38 페이지</span><span>•</span><span>2026.01.20</span></div>
+            </div>
+
+            <!-- Checklists -->
+            <div class="kb-card" data-cat="checklist">
+              <div class="kb-card-header"><span class="kb-card-icon">✅</span><span class="badge badge-warning">Checklist</span></div>
+              <div class="kb-card-title">ISO 9001 내부심사 체크리스트</div>
+              <div class="kb-card-desc">조항별 심사 질문, 확인 증거, 판정 기준이 포함된 종합 체크리스트. 반도체 산업 특화 항목 포함.</div>
+              <div class="kb-card-meta"><span>📎 XLSX</span><span>•</span><span>120 항목</span><span>•</span><span>2026.03.05</span></div>
+            </div>
+            <div class="kb-card" data-cat="checklist">
+              <div class="kb-card-header"><span class="kb-card-icon">✅</span><span class="badge badge-warning">Checklist</span></div>
+              <div class="kb-card-title">공급업체 2자 심사 체크리스트</div>
+              <div class="kb-card-desc">공급업체 현장 심사 시 사용하는 체크리스트. 품질, 납기, 원가, 기술 역량 평가 항목 포함.</div>
+              <div class="kb-card-meta"><span>📎 DOCX</span><span>•</span><span>85 항목</span><span>•</span><span>2026.04.12</span></div>
+            </div>
+
+            <!-- Cases -->
+            <div class="kb-card" data-cat="cases">
+              <div class="kb-card-header"><span class="kb-card-icon">📖</span><span class="badge badge-info">Case Study</span></div>
+              <div class="kb-card-title">반도체 Wafer FAB 심사 사례</div>
+              <div class="kb-card-desc">Lithography, Etching, Diffusion 공정 심사에서 발견된 주요 부적합 사례와 시정조치 내용.</div>
+              <div class="kb-card-meta"><span>📎 PDF</span><span>•</span><span>24 페이지</span><span>•</span><span>2026.05.08</span></div>
+            </div>
+
+            <!-- FMEA -->
+            <div class="kb-card" data-cat="fmea">
+              <div class="kb-card-header"><span class="kb-card-icon">🔥</span><span class="badge badge-danger">FMEA</span></div>
+              <div class="kb-card-title">Lithography 공정 PFMEA</div>
+              <div class="kb-card-desc">Photo 공정의 Process FMEA. Failure Mode, Severity, Occurrence, Detection, RPN, 권장 조치 포함.</div>
+              <div class="kb-card-meta"><span>📎 XLSX</span><span>•</span><span>45 항목</span><span>•</span><span>2026.04.22</span></div>
+            </div>
+
+            <!-- Expert Knowledge -->
+            <div class="kb-card" data-cat="expert">
+              <div class="kb-card-header"><span class="kb-card-icon">🧠</span><span class="badge badge-accent">Expert</span></div>
+              <div class="kb-card-title">자주 발생하는 부적합 TOP 20</div>
+              <div class="kb-card-desc">10년 경력 선임심사원이 정리한 ISO 9001 심사에서 가장 빈번하게 발견되는 부적합 유형 20가지.</div>
+              <div class="kb-card-meta"><span>🧠 노하우</span><span>•</span><span>20 항목</span><span>•</span><span>2026.05.30</span></div>
+            </div>
+            <div class="kb-card" data-cat="expert">
+              <div class="kb-card-header"><span class="kb-card-icon">🧠</span><span class="badge badge-accent">Expert</span></div>
+              <div class="kb-card-title">심사 인터뷰 기법 가이드</div>
+              <div class="kb-card-desc">효과적인 심사 인터뷰를 위한 질문 기법, 경청 스킬, 비언어적 커뮤니케이션 노하우.</div>
+              <div class="kb-card-meta"><span>🧠 노하우</span><span>•</span><span>15 팁</span><span>•</span><span>2026.05.25</span></div>
+            </div>
+
+            <!-- Control Plan -->
+            <div class="kb-card" data-cat="cp">
+              <div class="kb-card-header"><span class="kb-card-icon">📊</span><span class="badge badge-success">CP</span></div>
+              <div class="kb-card-title">Etching 공정 Control Plan</div>
+              <div class="kb-card-desc">Dry Etching 공정의 Control Plan. CTQ, 관리 항목, 측정 방법, 반응 계획 포함.</div>
+              <div class="kb-card-meta"><span>📎 XLSX</span><span>•</span><span>32 항목</span><span>•</span><span>2026.03.18</span></div>
+            </div>
+
+            <!-- SPC -->
+            <div class="kb-card" data-cat="spc">
+              <div class="kb-card-header"><span class="kb-card-icon">📈</span><span class="badge badge-info">SPC</span></div>
+              <div class="kb-card-title">CD 측정 SPC 분석 보고서</div>
+              <div class="kb-card-desc">Critical Dimension 측정 데이터의 Xbar-R 관리도, Cpk 분석, 이상원인 분석 보고서.</div>
+              <div class="kb-card-meta"><span>📎 XLSX</span><span>•</span><span>6개월 데이터</span><span>•</span><span>2026.06.01</span></div>
+            </div>
+
+            <!-- Procedure -->
+            <div class="kb-card" data-cat="procedure">
+              <div class="kb-card-header"><span class="kb-card-icon">📄</span><span class="badge badge-warning">Procedure</span></div>
+              <div class="kb-card-title">부적합품 관리 절차서</div>
+              <div class="kb-card-desc">부적합품 식별, 격리, 처리(폐기/특채/재작업), 기록 관리 절차. ISO 9001 §8.7 대응.</div>
+              <div class="kb-card-meta"><span>📎 DOCX</span><span>•</span><span>Rev.04</span><span>•</span><span>2026.04.01</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="dashboard.html" class="bottom-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="workspace.html" class="bottom-nav-item"><span class="nav-icon">🔍</span>Audit</a>
+    <a href="copilot.html" class="bottom-nav-item"><span class="nav-icon">🤖</span>AI</a>
+    <a href="knowledge-base.html" class="bottom-nav-item active"><span class="nav-icon">📚</span>KB</a>
+    <a href="reports.html" class="bottom-nav-item"><span class="nav-icon">📄</span>Reports</a>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <script>
+    function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('audit_theme',h.getAttribute('data-theme'));}
+    const st=localStorage.getItem('audit_theme');if(st)document.documentElement.setAttribute('data-theme',st);
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active');}
+
+    function filterKB(el, cat){
+      document.querySelectorAll('.kb-category').forEach(c=>c.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('.kb-card').forEach(card=>{
+        card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';
+      });
+    }
+
+    function searchKB(query){
+      const q=query.toLowerCase();
+      document.querySelectorAll('.kb-card').forEach(card=>{
+        const text=card.textContent.toLowerCase();
+        card.style.display=text.includes(q)?'':'none';
+      });
+    }
+
+    function showUploadModal(){alert('자료 업로드 기능은 PRO 플랜에서 사용할 수 있습니다.');}
+  </script>
+</body>
+</html>
