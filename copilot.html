@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="AI Audit Copilot — 자연어 기반 심사 지원 AI">
   <title>AI Copilot — Audit Copilot</title>
-  <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/pages/copilot.css">
+  <link rel="stylesheet" href="css/design-system.css?v=3">
+  <link rel="stylesheet" href="css/components.css?v=3">
+  <link rel="stylesheet" href="css/layout.css?v=3">
+  <link rel="stylesheet" href="css/animations.css?v=3">
+  <link rel="stylesheet" href="css/pages/copilot.css?v=3">
+  <link rel="stylesheet" href="css/pages/workspace-sub.css?v=3">
 </head>
 <body>
   <div class="app-layout">
@@ -19,7 +20,18 @@
       <nav class="sidebar-nav">
         <div class="sidebar-section"><div class="sidebar-section-title">Main</div>
           <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></a>
-          <a href="workspace.html" class="nav-item"><span class="nav-icon">🔍</span><span class="nav-label">Audit Workspace</span></a>
+          <!-- Collapsible Workspace Menu -->
+          <div class="nav-item-group">
+            <a href="workspace.html" class="nav-item">
+              <span class="nav-icon">🔍</span>
+              <span class="nav-label">Audit Workspace</span>
+            </a>
+            <div class="nav-sub-menu">
+              <a href="workspace-nav.html" class="nav-sub-item">├─ Clause Navigator</a>
+              <a href="workspace-audit.html" class="nav-sub-item">├─ AI Audit Engine</a>
+              <a href="workspace-nc.html" class="nav-sub-item">└─ AI NC Writer</a>
+            </div>
+          </div>
           <a href="copilot.html" class="nav-item active"><span class="nav-icon">🤖</span><span class="nav-label">AI Copilot</span><span class="nav-badge">AI</span></a>
         </div>
         <div class="sidebar-section"><div class="sidebar-section-title">Management</div>

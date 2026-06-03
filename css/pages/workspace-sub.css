@@ -1,0 +1,235 @@
+/* ============================================
+   Workspace Sub Pages Styles
+   ============================================ */
+
+/* ── Upper Switcher Tabs (상단 탭 바) ── */
+.ws-sub-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-glass-border);
+  padding-bottom: var(--space-4);
+}
+
+.ws-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.ws-back-link:hover {
+  color: var(--color-accent);
+}
+
+.ws-tab-navigation {
+  display: flex;
+  background: var(--color-glass);
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-glass-border);
+}
+
+.ws-tab-nav-item {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ws-tab-nav-item:hover {
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ws-tab-nav-item.active {
+  color: var(--color-text-inverse);
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Split Layouts ── */
+.ws-split-layout {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Navigator 2-Column: Left tree (340px) | Right detail (1fr) */
+.ws-layout-nav {
+  grid-template-columns: 340px 1fr;
+}
+
+/* Audit Engine 2-Column: Left controls/upload (40% ) | Right results/notes (60%) */
+.ws-layout-audit {
+  grid-template-columns: 4fr 6fr;
+}
+
+/* NC Writer 2-Column: Left inputs/form (5fr) | Right output/recent (5fr) */
+.ws-layout-nc {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── Panels & UI elements ── */
+.ws-sub-panel {
+  background: var(--gradient-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-height: 500px;
+}
+
+.ws-sub-panel-header {
+  border-bottom: 1px solid var(--color-glass-border);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+.ws-sub-panel-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Tree Navigation style refinement */
+.ws-tree-container {
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: var(--space-2);
+}
+
+/* Detailed Information display style */
+.ws-detail-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+[data-theme="dark"] .ws-detail-card {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ws-detail-title {
+  font-size: var(--text-h4);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ws-detail-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+/* High Contrast Input controls for best readability */
+.ws-form-control {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  width: 100%;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .ws-form-control {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ws-form-control:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
+}
+
+/* ── Responsive adjustments ── */
+@media (max-width: 1199px) {
+  .ws-layout-nav,
+  .ws-layout-audit,
+  .ws-layout-nc {
+    grid-template-columns: 1fr;
+  }
+  
+  .ws-sub-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .ws-sub-header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .ws-tab-navigation {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* ── Sidebar Sub-navigation refinement ── */
+.nav-item-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.nav-sub-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--space-8);
+  margin-top: 2px;
+  margin-bottom: var(--space-2);
+}
+
+.nav-sub-item {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.nav-sub-item:hover {
+  color: var(--color-text);
+  background: var(--color-glass);
+}
+
+.nav-sub-item.active {
+  color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+  background: rgba(124, 58, 237, 0.08);
+}
+

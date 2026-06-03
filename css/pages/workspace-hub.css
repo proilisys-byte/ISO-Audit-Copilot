@@ -1,0 +1,162 @@
+/* ============================================
+   Workspace Hub Styles
+   ============================================ */
+
+.ws-hub-container {
+  max-width: var(--content-max-width);
+  margin: var(--space-8) auto;
+  padding: 0 var(--container-padding);
+}
+
+.ws-hub-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.ws-hub-header h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-extrabold);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--letter-tight);
+}
+
+.ws-hub-header p {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Grid Layout ── */
+.ws-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+/* ── Glassmorphic Cards ── */
+.ws-hub-card {
+  background: var(--gradient-card);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Top border color gradients for premium look */
+.ws-hub-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.ws-hub-card:nth-child(2)::after {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.ws-hub-card:nth-child(3)::after {
+  background: var(--gradient-danger);
+}
+
+.ws-hub-card:hover::after {
+  transform: scaleX(1);
+}
+
+.ws-hub-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-accent);
+  border-color: var(--color-accent-light);
+}
+
+/* ── Card Content ── */
+.ws-hub-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: var(--space-6);
+  transition: transform var(--transition-spring);
+}
+
+[data-theme="dark"] .ws-hub-card-icon {
+  background: rgba(167, 139, 250, 0.15);
+}
+
+.ws-hub-card:hover .ws-hub-card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.ws-hub-card-title {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--letter-tight);
+}
+
+.ws-hub-card-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+  flex-grow: 1;
+}
+
+.ws-hub-card-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+  margin-top: auto;
+}
+
+.ws-hub-card:hover .ws-hub-card-action {
+  color: var(--color-accent-light);
+}
+
+.ws-hub-card-action svg {
+  transition: transform var(--transition-fast);
+}
+
+.ws-hub-card:hover .ws-hub-card-action svg {
+  transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+  .ws-hub-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  
+  .ws-hub-card {
+    padding: var(--space-6);
+  }
+}
