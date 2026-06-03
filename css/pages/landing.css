@@ -528,7 +528,7 @@
 
 /* ── Footer ── */
 .landing-footer {
-  background: var(--color-gray-900);
+  background: #000000;
   padding: var(--space-12) var(--space-6) var(--space-6);
   color: rgba(255, 255, 255, 0.5);
 }
