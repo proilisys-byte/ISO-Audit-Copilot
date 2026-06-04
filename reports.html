@@ -231,6 +231,27 @@
       document.querySelectorAll('.reports-section').forEach(s=>s.classList.remove('active'));
       document.getElementById('section-'+sectionId).classList.add('active');
     }
+
+    // Auto switch tab based on URL parameter or hash
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let tabParam = urlParams.get('tab') || window.location.hash.replace('#', '');
+      if (tabParam) {
+        const tabs = {
+          'reports': 'reports',
+          'nc': 'nc',
+          'capa': 'capa',
+          'risk': 'risk'
+        };
+        const targetTab = tabs[tabParam];
+        if (targetTab) {
+          const tabBtn = Array.from(document.querySelectorAll('.reports-tab')).find(el => el.getAttribute('onclick').includes(targetTab));
+          if (tabBtn) {
+            switchReportTab(tabBtn, targetTab);
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>
