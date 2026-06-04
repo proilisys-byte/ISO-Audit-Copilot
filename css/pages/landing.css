@@ -829,8 +829,8 @@
 
 /* Quality To Profit Section adjustments */
 .section-light-gold .proof-item {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid rgba(122, 95, 19, 0.15) !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 .section-light-gold .proof-value {
