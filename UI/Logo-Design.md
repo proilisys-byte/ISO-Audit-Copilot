@@ -1,88 +1,60 @@
-# Audit Copilot Logo Specifications
+# PRO ALI Brand Logo Design Specifications
 
-본 문서는 **PRO ILI SMART Audit Copilot** 플랫폼의 로고 디자인 시스템, 규격, 색상 조합 및 자산 활용 가이드를 담고 있습니다.
-
----
-
-## 🎨 로고 디자인 프리뷰 (Rendered SVG)
-
-아래는 Markdown에서 직접 렌더링된 공식 고해상도 SVG 로고입니다. (GitHub 및 지원 브라우저에서 올바르게 노출됩니다.)
-
-<div align="center" style="background: #0B0F19; padding: 40px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); margin: 20px 0;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="400" height="96">
-    <defs>
-      <!-- Gradient Definition matching var(--gradient-accent) -->
-      <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#7C3AED" />
-        <stop offset="100%" stop-color="#A78BFA" />
-      </linearGradient>
-      <!-- Premium Glow Effect -->
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="5" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-    </defs>
-    <!-- Background Icon Shape -->
-    <rect x="15" y="15" width="90" height="90" rx="24" fill="url(#logoGrad)" />
-    <!-- Glowing Accent Inner Dot -->
-    <circle cx="85" cy="35" r="5" fill="#FFFFFF" opacity="0.8" />
-    <!-- Brand Acronym 'AC' -->
-    <text x="60" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle" letter-spacing="-2">AC</text>
-    <!-- Main Text Brand Name -->
-    <text x="125" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="800" font-size="38" fill="#FFFFFF">Audit Copilot</text>
-    <!-- Subtitle matching Platform Subtitle -->
-    <text x="127" y="93" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="700" font-size="13" fill="#A78BFA" letter-spacing="6">PRO ILI SMART</text>
-  </svg>
-</div>
+본 문서는 **PRO ALI (Quality to Profit)** 브랜드 로고의 디자인 시스템, 그래픽 자산 규격, 서체 및 색상 규정을 설명합니다.
 
 ---
 
-## 📐 디자인 명세 (Design Specifications)
+## 🎨 로고 디자인 프리뷰 (Logo Variations)
 
-### 1. 색상 체계 (Color Codes)
-로고는 플랫폼의 메인 아이덴티티인 **AI & Premium**을 대변하기 위해 보라색 계열의 그라데이션을 사용합니다.
+### 1. 라이트 테마 (White Circular Badge)
+인쇄물, 공식 보고서, 문서 서식 등 밝은 배경에 최적화된 서식용 엠블럼입니다.
 
-- **Primary Gradient (Accent Gradient)**:
-  - 시작 색상: `#7C3AED` (Deep Violet)
-  - 끝 색상: `#A78BFA` (Light Lavender)
-  - 각도: `135도 (linear-gradient)`
-- **텍스트 및 전면 아이콘 색상**: `#FFFFFF` (Pure White)
-- **서브텍스트 색상**: `#A78BFA` (Light Lavender, 자투리 강조)
+![PRO ALI Logo - Light Theme](file:///e:/0000_ISO-%20Audit-Copilot/assets/images/logo_light.jpg)
 
-### 2. 서체 (Typography)
-브랜드의 신뢰성과 테크 SaaS 감성을 살리기 위해 기하학적이고 현대적인 산세리프 서체를 사용합니다.
+### 2. 다크 테마 (Premium 3D Neon Edition)
+대시보드 메인 화면, 다크모드 모바일 웹, 프리미엄 소개 페이지 등 디지털 인터페이스에 사용되는 광택 금속 마감 로고입니다.
 
-- **대표 서체**:
-  - 영문: `Inter` (ExtraBold / Black)
-  - 국문 동시 노출 영역: `Pretendard` 또는 `SUIT` (Bold)
-- **로고 폰트 두께 (Font Weights)**:
-  - 심볼 내 "AC" 약어: `900 (Black)`
-  - 타이틀 "Audit Copilot": `800 (ExtraBold)`
-  - 서브타이틀 "PRO ILI SMART": `700 (Bold)`
-
-### 3. 구조와 비율 (Proportions)
-- **심볼 아이콘**: `1:1 정사각 형태 (Border-radius: 26.6% / 24px 기준)`
-- **간격 (Padding)**: 심볼 박스와 내부 "AC" 텍스트의 상하좌우 중심을 완벽히 매칭
-- **텍스트 간격**: 메인 로고와 서브타이틀은 동일한 가로 정렬 라인(`x=125`)을 유지하여 통일성을 제공
+![PRO ALI Logo - Dark Theme](file:///e:/0000_ISO-%20Audit-Copilot/assets/images/logo_dark.jpg)
 
 ---
 
-## 💾 SVG 소스 코드 (SVG Source Code)
+## 📐 디자인 심볼 및 의미 (Symbolism)
 
-웹 디자인이나 그래픽 디자인 툴에 바로 가져다 쓸 수 있는 원본 SVG 코드입니다.
+새로운 **PRO ALI** 로고는 플랫폼의 핵심 목표인 **"품질 비용(COPQ)의 절감 및 재무적 성과로의 직결(Quality to Profit)"**을 시각적으로 정교하게 형상화했습니다.
 
-```xml
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="500" height="120">
-  <defs>
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7C3AED" />
-      <stop offset="100%" stop-color="#A78BFA" />
-    </linearGradient>
-  </defs>
-  <rect x="15" y="15" width="90" height="90" rx="24" fill="url(#logoGrad)" />
-  <circle cx="85" cy="35" r="5" fill="#FFFFFF" opacity="0.8" />
-  <text x="60" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle" letter-spacing="-2">AC</text>
-  <text x="125" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="800" font-size="38" fill="#FFFFFF">Audit Copilot</text>
-  <text x="127" y="93" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="700" font-size="13" fill="#A78BFA" letter-spacing="6">PRO ILI SMART</text>
-</svg>
-```
+| 디자인 구성 요소 | 시각적 특징 | 상징적 의미 |
+| :--- | :--- | :--- |
+| **상승 번개 화살표** | Orange-to-Red 그라데이션 | **Profit (재무적 수익)**, 신속한 심사 속도, 비즈니스 성장 |
+| **품질 곡선 (P 루프)** | Teal-to-Mint Green 곡선형 swoosh | **Quality (품질 보증)**, 친환경(Green), 지속 가능한 순환 루프 |
+| **신뢰 기반 스탠드** | Blue 그라데이션 금속 기둥 | **Compliance (규격 준수)**, 견고한 데이터 신뢰성 및 시스템 안정성 |
+| **다이아몬드 포인트** | Yellow-to-Gold 보석 | **Premium Value (최상의 가치)**, 유료 구독 등급 및 심사의 격조 |
+
+---
+
+## 🎨 공식 브랜드 색상 (Official Brand Colors)
+
+로고 마크에 적용되는 스펙트럼 배합 규정입니다.
+
+### 1. 심볼 그라데이션 (Symbol Gradients)
+- **Arrow (Profit)**: `linear-gradient(135deg, #FF6F00 0%, #D50000 100%)`
+- **Swoosh (Quality)**: `linear-gradient(135deg, #00BFA5 0%, #00C853 100%)`
+- **Base (Trust)**: `linear-gradient(135deg, #2979FF 0%, #0D47A1 100%)`
+- **Diamond (Premium)**: `linear-gradient(135deg, #FFD600 0%, #FF8F00 100%)`
+
+### 2. 텍스트 색상 (Text Colors)
+- **Primary Brand Text ("PRO ALI")**:
+  - 라이트 배경: `#111827` (Charcoal)
+  - 다크 배경: `#FFFFFF` (Pure White)
+- **Slogan Text ("Quality to Profit")**:
+  - 공통 골드 테마: `#D4AF37` (Metallic Gold)
+
+---
+
+## ✍️ 타이포그래피 규칙 (Typography Rules)
+
+- **브랜드명 ("PRO ALI")**:
+  - 영문 대문자로 표기하며, 자간(Letter spacing)을 좁게 설정해 단단하고 힘 있는 느낌을 전달합니다.
+  - 서체: `Inter Black` 또는 `Montserrat ExtraBold`
+- **슬로건 ("Quality to Profit")**:
+  - 서체: `Montserrat Medium` 또는 `Inter SemiBold`
+  - 대소문자 규칙: 각 단어의 첫 글자만 대문자(Title Case)로 지정합니다.

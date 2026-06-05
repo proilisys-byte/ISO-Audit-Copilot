@@ -1,85 +1,45 @@
-# Audit Copilot Logo Specifications
+# PRO ALI Logo Specifications
 
-본 문서는 **PRO ILI SMART Audit Copilot** 플랫폼의 로고 디자인 시스템, 규격, 색상 조합 및 자산 활용 가이드를 담고 있습니다.
+본 문서는 **PRO ALI (Quality to Profit)** 브랜드의 공식 로고 사양과 활용 가이드를 담고 있습니다.
 
 상세 디자인 가이드 문서는 [UI/Logo-Design.md](file:///e:/0000_ISO-%20Audit-Copilot/UI/Logo-Design.md)에서도 확인하실 수 있습니다.
 
 ---
 
-## 🎨 로고 디자인 프리뷰 (Rendered SVG)
+## 🎨 로고 디자인 프리뷰 (Logo Preview)
 
-아래는 Markdown에서 직접 렌더링된 공식 고해상도 SVG 로고입니다. (GitHub 및 지원 브라우저에서 올바르게 노출됩니다.)
+### 1. 라이트 테마 로고 (Light Theme Logo)
+흰색 바탕의 원형 엠블럼 형태로, 깔끔하고 화사한 문서 양식이나 배경에 적합합니다.
 
-<div align="center" style="background: #0B0F19; padding: 40px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); margin: 20px 0;">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="400" height="96">
-    <defs>
-      <!-- Gradient Definition matching var(--gradient-accent) -->
-      <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#7C3AED" />
-        <stop offset="100%" stop-color="#A78BFA" />
-      </linearGradient>
-      <!-- Premium Glow Effect -->
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="5" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-    </defs>
-    <!-- Background Icon Shape -->
-    <rect x="15" y="15" width="90" height="90" rx="24" fill="url(#logoGrad)" />
-    <!-- Glowing Accent Inner Dot -->
-    <circle cx="85" cy="35" r="5" fill="#FFFFFF" opacity="0.8" />
-    <!-- Brand Acronym 'AC' -->
-    <text x="60" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle" letter-spacing="-2">AC</text>
-    <!-- Main Text Brand Name -->
-    <text x="125" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="800" font-size="38" fill="#FFFFFF">Audit Copilot</text>
-    <!-- Subtitle matching Platform Subtitle -->
-    <text x="127" y="93" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="700" font-size="13" fill="#A78BFA" letter-spacing="6">PRO ILI SMART</text>
-  </svg>
-</div>
+![PRO ALI Logo - Light Theme](file:///e:/0000_ISO-%20Audit-Copilot/assets/images/logo_light.jpg)
+
+### 2. 다크 테마 로고 (Dark Theme Logo)
+검은색 금속 질감의 배경에 네온 글루(Teal to Orange) 링과 입체적인 3D 금속 심볼이 어우러진 고급스러운 프리미엄 에디션입니다. 대시보드나 랜딩페이지의 메인 다크 모드 배경에 적합합니다.
+
+![PRO ALI Logo - Dark Theme](file:///e:/0000_ISO-%20Audit-Copilot/assets/images/logo_dark.jpg)
 
 ---
 
-## 📐 디자인 명세 (Design Specifications)
+## 📐 디자인 심볼 및 의미 (Brand Symbolism)
 
-### 1. 색상 체계 (Color Codes)
-로고는 플랫폼의 메인 아이덴티티인 **AI & Premium**을 대변하기 위해 보라색 계열의 그라데이션을 사용합니다.
+새로운 **PRO ALI** 로고는 플랫폼의 미션인 **"품질을 통해 이익을 창출한다 (Quality to Profit)"**를 시각적으로 구상화했습니다.
 
-- **Primary Gradient (Accent Gradient)**:
-  - 시작 색상: `#7C3AED` (Deep Violet)
-  - 끝 색상: `#A78BFA` (Light Lavender)
-  - 각도: `135도 (linear-gradient)`
-- **텍스트 및 전면 아이콘 색상**: `#FFFFFF` (Pure White)
-- **서브텍스트 색상**: `#A78BFA` (Light Lavender, 자투리 강조)
-
-### 2. 서체 (Typography)
-브랜드의 신뢰성과 테크 SaaS 감성을 살리기 위해 기하학적이고 현대적인 산세리프 서체를 사용합니다.
-
-- **대표 서체**:
-  - 영문: `Inter` (ExtraBold / Black)
-  - 국문 동시 노출 영역: `Pretendard` 또는 `SUIT` (Bold)
-- **로고 폰트 두께 (Font Weights)**:
-  - 심볼 내 "AC" 약어: `900 (Black)`
-  - 타이틀 "Audit Copilot": `800 (ExtraBold)`
-  - 서브타이틀 "PRO ILI SMART": `700 (Bold)`
+1. **번개 & 상승 화살표 (Orange to Red)**
+   - 왼쪽의 붉은 오렌지빛 화살표는 비즈니스의 **재무적 성과(Profit)**, **빠른 속도**, 그리고 **상승 성장**을 의미합니다.
+2. **품질 곡선 (Green Swoosh)**
+   - 알파벳 **P**의 상단 루프를 형성하는 청록색 곡선은 **품질 관리(Quality)**, **지속 가능성**, 그리고 **공정의 매끄러운 연결**을 의미합니다.
+3. **신뢰의 기반 (Blue Stand)**
+   - **P**의 하단 스탠드를 지탱하는 파란색 그라데이션은 **규격 준수(Compliance)**, **신뢰성(Trustworthiness)**, 그리고 **안정적 기반**을 의미합니다.
+4. **다이아몬드 보석 (Yellow Gem)**
+   - 심볼 상단 오른쪽에 위치한 황금빛 다이아몬드는 플랫폼이 고객에게 제공하는 **최고의 가치(Value)**와 **프리미엄 서비스 등급**을 대변합니다.
 
 ---
 
-## 💾 SVG 소스 코드 (SVG Source Code)
+## 🎨 색상 코드 (Brand Color Palette)
 
-웹 디자인이나 그래픽 디자인 툴에 바로 가져다 쓸 수 있는 원본 SVG 코드입니다.
-
-```xml
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="500" height="120">
-  <defs>
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7C3AED" />
-      <stop offset="100%" stop-color="#A78BFA" />
-    </linearGradient>
-  </defs>
-  <rect x="15" y="15" width="90" height="90" rx="24" fill="url(#logoGrad)" />
-  <circle cx="85" cy="35" r="5" fill="#FFFFFF" opacity="0.8" />
-  <text x="60" y="76" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="900" font-size="46" fill="#FFFFFF" text-anchor="middle" letter-spacing="-2">AC</text>
-  <text x="125" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="800" font-size="38" fill="#FFFFFF">Audit Copilot</text>
-  <text x="127" y="93" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Pretendard', sans-serif" font-weight="700" font-size="13" fill="#A78BFA" letter-spacing="6">PRO ILI SMART</text>
-</svg>
-```
+- **상승 화살표**: `#FF5E00` (Orange) ➔ `#FF0000` (Red)
+- **품질 곡선**: `#00BFA5` (Teal) ➔ `#00E676` (Mint Green)
+- **신뢰 기반**: `#2979FF` (Royal Blue) ➔ `#2962FF` (Deep Blue)
+- **다이아몬드**: `#FFC400` (Amber Yellow) ➔ `#FFAB00` (Gold)
+- **메인 텍스트**: `PRO ALI` (`#1A253C` / `#FFFFFF` 대비 고정 두께 서체)
+- **슬로건**: `Quality to Profit` (`#D4AF37` Gold 그라데이션 및 매칭 컬러)
