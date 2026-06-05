@@ -1,5 +1,5 @@
 /**
- * PRO ILI SMART Audit Copilot — Google Apps Script Backend
+ * PRO ALI SMART Audit Copilot — Google Apps Script Backend
  * =========================================================
  * 이 코드를 Google Apps Script 편집기에 붙여넣고 Web App으로 배포하세요.
  * 

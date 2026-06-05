@@ -1,4 +1,4 @@
-# PRO ILI SMART Audit Copilot — Master Project Document
+# PRO ALI SMART Audit Copilot — Master Project Document
 
 > **이 문서는 프로젝트의 단일 진실 원천(Single Source of Truth)입니다.**
 > 새 대화/세션에서 작업을 이어갈 때 이 문서를 먼저 읽으세요.

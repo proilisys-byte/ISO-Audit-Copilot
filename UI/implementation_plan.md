@@ -1,4 +1,4 @@
-# PRO ILI SMART Audit Copilot - 구현 계획서
+# PRO ALI SMART Audit Copilot - 구현 계획서
 
 ## 프로젝트 개요
 
